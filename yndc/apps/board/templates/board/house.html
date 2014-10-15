@@ -1,0 +1,9 @@
+House: {{ house }} <br />
+{% if house.boards.all %}
+    Boards:
+    {% for board in house.boards.all %}
+    <ul>
+        <li>{{ board }}</li>
+    </ul>
+    {% endfor %}
+{% endif %}
