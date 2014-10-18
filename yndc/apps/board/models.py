@@ -28,7 +28,7 @@ class House(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, blank=True, null=True)
     notes = models.TextField(blank=True)
 
-    #photo = models.ImageField()
+    photo = models.ImageField(upload_to='yndc-photos')
 
     # Outside checklist
     outside_check_lawn_work = models.BooleanField(default=False,
