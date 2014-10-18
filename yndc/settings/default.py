@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os, sys
 
 BASE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, "%s%sapps" % (BASE_DIR, os.sep))
+sys.path.insert(0, "%s%s..%sapps" % (BASE_DIR, os.sep, os.sep))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/

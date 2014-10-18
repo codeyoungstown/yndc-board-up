@@ -56,3 +56,6 @@ target/
 # DB
 *.sqlite
 *.sqlite3
+
+# Local settings
+local.py
