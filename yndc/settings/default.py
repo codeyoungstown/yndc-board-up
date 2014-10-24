@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os, sys
 
-BASE_DIR = os.path.dirname(__file__)
-sys.path.insert(0, "%s%s..%sapps" % (BASE_DIR, os.sep, os.sep))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
+sys.path.insert(0, "%s%sapps" % (BASE_DIR, os.sep))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -88,6 +88,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static')
+)
 
 LOGIN_URL = '/login/'
 
