@@ -1,15 +1,47 @@
 {% extends "base_index.html" %}
-
-List <br />
-
-{% for house in houses %}
-    House: {{ house }} <br />
-    {% if house.boards.all %}
-        Boards:
-        {% for board in house.boards.all %}
-        <ul>
-            <li>{{ board }}</li>
+{% block content %}
+<header>
+      <div class="col-xs-12">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="active"><a href="#">Properties</a></li>
+          <li><a href="neighborhood.html">Neighborhoods</a></li>
         </ul>
-        {% endfor %}
-    {% endif %}
-{% endfor %}
+      </div>
+       
+    </header>
+    <div id="main" role="main">
+      <div class="container">
+       <button class="btn btn-default pad" type="button">Add Property</button>      
+      </div>
+      <div class="container">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Neighborhood</th>
+                <th>Action</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>126 S. Hazelwood</td>
+                <td>Crandall Park</td>
+                <td>Edit | Delete</td>
+                
+              </tr>
+              <tr>
+                <td>145 S. Hazelwood</td>
+                <td>Rocky Ridge</td>
+               <td>Edit | Delete</td>
+              </tr>
+              <tr>
+                <td>134 N. Schenley</td>
+                <td>Idora</td>
+                <td>Edit | Delete</td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
+</div>
+{% endblock content %}
