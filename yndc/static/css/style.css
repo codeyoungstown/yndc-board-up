@@ -17,3 +17,16 @@
     display: block;
     margin: 10px auto;
 }
+
+.yndc-nav {
+    background-image: linear-gradient(to bottom, #0f8650 0px, #01512c 100%);
+}
+
+.yndc-nav a {
+    color: #FFFFFF !important;
+}
+
+.yndc-nav .navbar-nav > .active > a {
+    background-image: linear-gradient(to bottom, #0f8650 0px, #01512c 100%);
+    box-shadow: 0 3px 9px rgba(0, 0, 0, 0.25) inset;
+}
