@@ -26,8 +26,8 @@ def login_user(request):
 @login_required()
 def list(request):
     houses = House.objects.all()
-    return render_to_response('board/list.html', {'houses': houses},
-        context_instance=RequestContext(request))
+    return render_to_response('board/list.html', {'houses': houses,
+        'page': 'properties'}, context_instance=RequestContext(request))
 
 
 @login_required
@@ -35,8 +35,8 @@ def neighborhood(request, neighborhood_slug):
     neighborhood = get_object_or_404(Neighborhood, slug=neighborhood_slug)
     houses = House.objects.filter(neighborhood_id=neighborhood.pk)
     return render_to_response('board/neighborhood.html',
-        {'neighborhood': neighborhood, 'houses': houses},
-        context_instance=RequestContext(request))
+        {'neighborhood': neighborhood, 'houses': houses,
+        'page': 'neighborhoods'}, context_instance=RequestContext(request))
 
 
 @login_required
