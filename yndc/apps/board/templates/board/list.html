@@ -15,22 +15,18 @@
               </tr>
             </thead>
             <tbody>
+              {% for house in houses %}
               <tr>
-                <td>126 S. Hazelwood</td>
-                <td>Crandall Park</td>
-                <td>Edit | Delete</td>
-                
+                <td>
+                    <a href="{% url 'house' house.slug %}">{{ house.address }}</a>
+                </td>
+                <td>{{ house.neighborhood.name }}</td>
+                <td>
+                    <a href="" class="btn btn-info btn-sm active" role="button">edit</a>
+                    <a href="" class="btn btn-danger btn-sm active" role="button">delete</a>
+                </td>
               </tr>
-              <tr>
-                <td>145 S. Hazelwood</td>
-                <td>Rocky Ridge</td>
-               <td>Edit | Delete</td>
-              </tr>
-              <tr>
-                <td>134 N. Schenley</td>
-                <td>Idora</td>
-                <td>Edit | Delete</td>
-              </tr>
+              {% endfor %}
             </tbody>
         </table>
       </div>
