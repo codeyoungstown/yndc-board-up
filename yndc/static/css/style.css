@@ -5,9 +5,15 @@
 .login-container {
     margin: 0 auto;
     float: none;
-    width: 500px;
+    width: 300px;
 }
 
 .login-container input {
     margin-bottom: 5px;
+}
+
+.login-container img {
+    margin: 0 auto;
+    display: block;
+    margin: 10px auto;
 }

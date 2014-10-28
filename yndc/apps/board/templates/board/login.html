@@ -4,10 +4,14 @@
 <div class="row">
   <div class="col-md-4 col-xs-8 login-container">
       <form action="" method="POST" role="form">
-        <h2 class="form-signin-heading">YNDC login</h2>
+        <img src="{{ STATIC_URL }}images/logo.jpg" width="192" height="64">
         {% csrf_token %}
-        <input type="text" placeholder="Username" class="form-control">
-        <input type="password" placeholder="Password" class="form-control">
+        <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+            <input type="text" name="username" placeholder="Username" {% if form.username.value %}value="{{ form.username.value }}"{% endif %} class="form-control">
+        </div>
+        <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+            <input type="password" name="password" placeholder="Password" class="form-control">
+        </div>
         <button class="btn btn-lg btn-default btn-block" type="submit">Sign in</button>
       </form>
   </div>
