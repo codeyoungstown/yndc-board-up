@@ -118,6 +118,26 @@ class House(models.Model):
             self.slug = slug_to_save
         super(House, self).save()
 
+    def _get_checklist(self, prefix):
+        checks = []
+        for x in self._meta.fields:
+            if x.name.startswith(prefix) and getattr(self, x.name):
+                check = {
+                    'title': x.help_text,
+                    'value': getattr(self, x.name, False)
+                }
+                checks.append(check)
+        return checks
+
+    def outside_checklist(self):
+        return self._get_checklist('outside_check')
+
+    def removal_checklist(self):
+        return self._get_checklist('removal_check')
+
+    def general_checklist(self):
+        return self._get_checklist('general_check')
+
 
 class Board(models.Model):
     house = models.ForeignKey(House, related_name='boards')

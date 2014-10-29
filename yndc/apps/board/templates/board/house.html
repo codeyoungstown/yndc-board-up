@@ -1,45 +1,90 @@
 {% extends "base_index.html" %}
 {% block content %}
-    <nav class="col-xs-12">
-      
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="active"><a href="#">Properties</a></li>
-          <li><a href="#">Neighborhoods</a></li>
-        </ul>
-       
-    </nav>
     <div class="container-fluid">
-    <header>
-      <h1>{{ house.address }}</h1>
-      {% if house.neighborhood %}
-      <h2>{{ house.neighborhood.name }}</h2>
-      {% endif %}
-    </header>
-    <section>
-      {% if house.photo %}
-      <div class="col-md-12">
-        <img src="{{ house.photo.url }}">
-      </div>
-      {% endif %}
-      <div class="col-md-6 pad">
-         {% if house.notes %} 
-        <p>
-          {{ house.notes }}
-        </p>
-        {% endif %}
-      </div>
-      <div class="col-md-12 pad">
-        <form >
-          <input type="checkbox" value="lawn_work"> Lawn Work</br>
-          <input type="checkbox" value="reclaim_sidewalk"> Reclaim Sidewalk</br>
-          <input type="checkbox" value="reclaim_driveway"> Reclaim Driveway</br>
-          <input type="checkbox" value="etc">Etc
-        </form>
-      </div>
-      <div class="col-md-12 pad">
-        <button type="button" class="btn btn-default">Print</button>
-        <button type="button" class="btn btn-default">Edit</button>
-      </div>
-    </section>
+        <h1 class="page-header">{{ house.address }}</h1>
+        <section>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basic Info</h3>
+                </div>
+                <div class="panel-body">
+                    <p><b>Address:</b> {{ house.address }}</p>
+                    {% if house.neighborhood %}
+                    <p><b>Neighborhood:</b> {{ house.neighborhood.name }}</p>
+                    {% endif %}
+                    <p><b>Photo:</b></p>
+                    {% if house.photo %}
+                    <img src="{{ house.photo.url }}">
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if house.notes %} 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Notes</h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                    {{ house.notes }}
+                    </p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if house.outside_checklist %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Outside</h3>
+                </div>
+                <table class="table">
+                    {% for check in house.outside_checklist %}
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            {% if house.removal_checklist %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Removal</h3>
+                </div>
+                <table class="table">
+                    {% for check in house.removal_checklist %}
+                    <tr>
+                        <td>
+                        <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            {% if house.general_checklist %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">General</h3>
+                </div>
+                <table class="table">
+                    {% for check in house.general_checklist %}
+                    <tr>
+                        <td>
+                        <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            <button type="button" class="btn btn-default">Print</button>
+            <button type="button" class="btn btn-default">Edit</button>
+        </section>
     </div>
 {% endblock content %}
