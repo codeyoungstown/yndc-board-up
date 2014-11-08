@@ -1,3 +1,4 @@
+from django import forms
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
@@ -48,11 +49,18 @@ def house(request, house_slug):
 
 @login_required
 def add_house(request):
-    BoardFormSet = modelformset_factory(Board, form=BoardForm, extra=2)
+    widgets = {
+        'height': forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'height'}),
+        'width': forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'width'}),
+        'description': forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'description'})
+    }
+
+    BoardFormSet = modelformset_factory(Board, form=BoardForm, extra=2,
+        widgets=widgets)
 
     if request.method == 'POST':
         house_form = HouseForm(request.POST, request.FILES)
-        board_formset = BoardFormSet(request.POST)
+        board_formset = BoardFormSet(request.POST, queryset=Board.objects.none())
 
         if house_form.is_valid() and board_formset.is_valid():
             house = house_form.save()
@@ -63,7 +71,7 @@ def add_house(request):
             return HttpResponseRedirect(reverse('house', args=[house.slug]))
     else:
         house_form = HouseForm()
-        board_formset = BoardFormSet()
+        board_formset = BoardFormSet(queryset=Board.objects.none())
 
     return render_to_response('board/add_house.html',
         {'house_form': house_form, 'board_formset': board_formset},

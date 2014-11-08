@@ -4,6 +4,7 @@
         <section>
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+                {{ board_formset.management_form }}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Add Property</h3>
@@ -88,6 +89,23 @@
                                     </div>
                                     {% endfor %}
                                 </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h5>Boards</h5>
+                                {% for form in board_formset.forms %}
+                                <div class="row">
+                                    <label class="col-sm-1 control-label">Board</label>
+                                    <div class="col-sm-10">
+                                    {% for field in form.visible_fields %}
+                                        <div class="form-group inline-input">
+                                            {{ field }}
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </td>
                         </tr>
                         <tr>

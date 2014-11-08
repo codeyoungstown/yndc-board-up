@@ -38,3 +38,12 @@
 .photo-help {
     color: #FF0000;
 }
+
+.inline-input {
+    display:inline-block;
+}
+
+.inline-input input {
+    width:auto;
+}
+
