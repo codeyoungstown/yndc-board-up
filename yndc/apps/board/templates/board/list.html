@@ -2,7 +2,7 @@
 {% block content %}
     <div id="main" role="main">
       <div class="container-fluid">
-        <button class="btn btn-success btn-lg add-property" type="button">Add Property</button>
+        <a href="{% url 'add' %}" class="btn btn-default btn-lg add-property" role="button">Add Property</a>
         <table class="table table-striped">
             <thead>
               <tr>
@@ -19,8 +19,8 @@
                 </td>
                 <td>{{ house.neighborhood.name }}</td>
                 <td>
-                    <a href="" class="btn btn-info btn-sm active" role="button">edit</a>
-                    <a href="" class="btn btn-danger btn-sm active" role="button">delete</a>
+                    <a href="" class="btn btn-default btn-sm" role="button">edit</a>
+                    <a href="" class="btn btn-default btn-sm" role="button">delete</a>
                 </td>
               </tr>
               {% endfor %}
