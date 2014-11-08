@@ -51,7 +51,7 @@ def add_house(request):
     BoardFormSet = modelformset_factory(Board, form=BoardForm, extra=2)
 
     if request.method == 'POST':
-        house_form = HouseForm(request.POST)
+        house_form = HouseForm(request.POST, request.FILES)
         board_formset = BoardFormSet(request.POST)
 
         if house_form.is_valid() and board_formset.is_valid():
