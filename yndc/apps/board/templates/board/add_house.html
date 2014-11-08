@@ -1,48 +1,105 @@
 {% extends "base_index.html" %}
 {% block content %}
-    <nav>
-      <div class="col-xs-12">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="active"><a href="#">Properties</a></li>
-          <li><a href="neighborhood.html">Neighborhoods</a></li>
-        </ul>
-      </div>
-     </nav>
-  <div class="container-fluid">
-    <header>
-      <h1>528 Hazelwood</h1>
-      <h2>Rocky Ridge</h2>
-    </header>
- 	<section>
-      <div class="col-md-4 pad">
-       <form> 
-        <p>
-       		<input class="form-control" type="text" value="address" name="address">
-     	</p>
-        <p>
-        <select>
-            <optgroup label="Neighborhood">
-              <option value="wick_park">Wick Park</option>
-              <option value="rocky_ridge">Rocky Ridge</option>
-              <option value="idora">Idora</option>
-              <option value="etc">Etc</option>
-            </optgroup>
-        </select>
-      	</p>
-        <p>
-	        <textarea rows="7" cols="60">
-	          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
-	        </textarea>
-        </p>
-        <p>
-        	<input type="file" name="picture">
-        </p>
-          <input type="checkbox" value="lawn_work"> Lawn Work</br>
-          <input type="checkbox" value="reclaim_sidewalk"> Reclaim Sidewalk</br>
-          <input type="checkbox" value="reclaim_driveway"> Reclaim Driveway</br>
-          <input type="checkbox" value="etc"> Etc
-        </form>
-        </div>
-   	 </section>
-</div>
+    <div class="container-fluid">
+        <section>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add Property</h3>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="form-group{% if house_form.address.errors %} has-error{% endif %}">
+                                    <label>Address</label>
+                                    <input type="text" name="address" placeholder="Address" {% if house_form.address.value %}value="{{ house_form.address.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if house_form.neighborhood.errors %} has-error{% endif %}">
+                                    <label>Neighborhood</label>
+                                    <select name="neighborhood" class="form-control">
+                                    {% for id, name in house_form.neighborhood.field.choices %}
+                                    <option value="{{ id }}"{% if house_form.neighborhood.value|add:"0" == id %} selected="selected"{% endif %}>{{ name }}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if house_form.notes.errors %} has-error{% endif %}">
+                                    <label>Notes</label>
+                                    <textarea name="notes" class="form-control" rows="3">{% if house_form.notes.value %}{{ house_form.notes.value }}{% endif %}</textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label>Photo</label>
+                                    {{ house_form.photo }}
+                                    {% if house_form.photo.errors %}
+                                    <p class="photo-help help-block">A photo is required</p>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Outside</label>
+                                <div class="form-group">
+                                    {% for field in house_form.outside_checklist_fields %}
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="{{ field.name }}"{% if field.value %} checked{% endif %}> {{ field.field.help_text }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Removal</label>
+                                <div class="form-group">
+                                    {% for field in house_form.removal_checklist_fields %}
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="{{ field.name }}"{% if field.value %} checked{% endif %}> {{ field.field.help_text }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>General</label>
+                                <div class="form-group">
+                                    {% for field in house_form.general_checklist_fields %}
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="{{ field.name }}"{% if field.value %} checked{% endif %}> {{ field.field.help_text }}
+                                        </label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </section>
+    </div>
 {% endblock content %}
