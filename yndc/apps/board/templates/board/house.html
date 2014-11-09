@@ -57,7 +57,7 @@
                     {% for check in house.removal_checklist %}
                     <tr>
                         <td>
-                        <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
+                            <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
                         </td>
                     </tr>
                     {% endfor %}
@@ -74,7 +74,24 @@
                     {% for check in house.general_checklist %}
                     <tr>
                         <td>
-                        <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
+                            <span class="glyphicon glyphicon-ok"></span> {{ check.title }}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+
+            {% if house.boards.all %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Boards</h3>
+                </div>
+                <table class="table">
+                    {% for board in house.boards.all %}
+                    <tr>
+                        <td>
+                            <strong>{{ board.description }}</strong> - {{ board.width }}W x {{ board.height }}H
                         </td>
                     </tr>
                     {% endfor %}
