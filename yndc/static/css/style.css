@@ -1,3 +1,7 @@
+.container-fluid {
+    margin-bottom:10px;
+}
+
 .pad{
     margin:10px 0 10px 0;
 }
