@@ -28,7 +28,7 @@ def login_user(request):
 def list(request):
     ctx = {'page': 'properties'}
 
-    houses = House.objects.all()
+    houses = House.objects.active()
 
     if request.GET.get('neighborhood'):
         ctx['neighborhood_slug'] = request.GET['neighborhood']
@@ -54,6 +54,14 @@ def house(request, house_slug):
     house = get_object_or_404(House, slug=house_slug)
     return render_to_response('board/house.html', {'house': house},
         context_instance=RequestContext(request))
+
+
+@login_required
+def archive(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+    house.archived = True
+    house.save()
+    return HttpResponseRedirect(reverse('list'))
 
 
 @login_required

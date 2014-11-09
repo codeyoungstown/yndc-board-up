@@ -35,8 +35,8 @@
                 </td>
                 <td>{{ house.neighborhood.name }}</td>
                 <td>
-                    <a href="" class="btn btn-default btn-sm" role="button">edit</a>
-                    <a href="" class="btn btn-default btn-sm" role="button">delete</a>
+                    <a href="" class="btn btn-default btn-sm" role="button">Edit</a>
+                    <a href="{% url 'archive' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default btn-sm" role="button">Archive</a>
                 </td>
               </tr>
               {% endfor %}
