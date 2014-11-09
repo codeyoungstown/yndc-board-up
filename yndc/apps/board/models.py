@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from board.managers import HouseManager
+
 
 class Neighborhood(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -27,8 +29,9 @@ class House(models.Model):
     slug = models.SlugField(blank=True)
     neighborhood = models.ForeignKey(Neighborhood, blank=True, null=True)
     notes = models.TextField(blank=True)
-
     photo = models.ImageField(upload_to='yndc-photos')
+
+    archived = models.BooleanField(default=False)
 
     # Outside checklist
     outside_check_lawn_work = models.BooleanField(default=False,
@@ -102,6 +105,8 @@ class House(models.Model):
         help_text='Clea out flower beds.')
     general_check_paint = models.BooleanField(default=False,
         help_text='Paint existing boards.')
+
+    objects = HouseManager()
 
     def __unicode__(self):
         return self.address
