@@ -93,9 +93,10 @@
                         <tr>
                             <td>
                                 <h5>Boards</h5>
+                                <hr>
                                 {% for form in board_formset.forms %}
                                 <div class="row">
-                                    <label class="col-sm-1 control-label">Board</label>
+                                    <label class="col-sm-1 control-label">Board {{ forloop.counter }}</label>
                                     <div class="col-sm-10">
                                     {% for field in form.visible_fields %}
                                         <div class="form-group inline-input">
