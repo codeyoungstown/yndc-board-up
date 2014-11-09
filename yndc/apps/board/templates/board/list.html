@@ -1,7 +1,5 @@
 {% extends "base_index.html" %}
 {% block content %}
-    <div id="main" role="main">
-      <div class="container-fluid">
         <a href="{% url 'add' %}" class="btn btn-default btn-lg add-property" role="button">Add Property</a>
         <table class="table table-striped">
             <thead>
@@ -26,6 +24,4 @@
               {% endfor %}
             </tbody>
         </table>
-      </div>
-</div>
 {% endblock content %}
