@@ -26,9 +26,18 @@ def login_user(request):
 
 @login_required()
 def list(request):
+    ctx = {'page': 'properties'}
+
     houses = House.objects.all()
-    return render_to_response('board/list.html', {'houses': houses,
-        'page': 'properties'}, context_instance=RequestContext(request))
+
+    if request.GET.get('neighborhood'):
+        ctx['neighborhood_slug'] = request.GET['neighborhood']
+        houses = houses.filter(neighborhood__slug=request.GET['neighborhood'])
+
+    ctx['houses'] = houses
+    ctx['neighborhoods'] = Neighborhood.objects.all()
+    return render_to_response('board/list.html', ctx,
+        context_instance=RequestContext(request))
 
 
 @login_required

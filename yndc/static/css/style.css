@@ -35,8 +35,9 @@
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.25) inset;
 }
 
-.add-property {
+.list-actions {
     float: right;
+    margin-left: 10px;
 }
 
 .photo-help {
