@@ -1,48 +1,48 @@
 {% extends "base_index.html" %}
 {% block content %}
-    <header>
-      <div class="col-xs-12">
-        <ul class="nav nav-tabs" role="tablist">
-          <li><a href="properties.html">Properties</a></li>
-          <li class="active"><a href="#">Neighborhoods</a></li>
-        </ul>
-      </div>
-       
-    </header>
-    <div id="main" role="main">
-      
-        <div class="col-xs-10 col-md-4">
-          <div class="input-group pad">
-            <input type="text" class="form-control" required>
-            <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Add Neighborhood</button>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-lg-6 -->
-      
-    </div>
-    <div class="container">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Address</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Crandall Park</td>
-            <td>Edit | Delete</td>
-          </tr>
-          <tr>
-            <td>Marget District</td>
-            <td>Edit | Delete</td>
-          </tr>
-          <tr>
-            <td>Rocky Ridge</td>
-            <td>Edit | Delete</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <header>
+          <div class="col-xs-12">
+            <ul class="nav nav-tabs" role="tablist">
+              <li><a href="properties.html">Properties</a></li>
+              <li class="active"><a href="#">Neighborhoods</a></li>
+            </ul>
+          </div>
+           
+        </header>
+        <div id="main" role="main">
+          
+            <div class="col-xs-10 col-md-4">
+              <div class="input-group pad">
+                <input type="text" class="form-control" required>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Add Neighborhood</button>
+                </span>
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+          
+        </div>
+        <div class="container">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Crandall Park</td>
+                <td>Edit | Delete</td>
+              </tr>
+              <tr>
+                <td>Marget District</td>
+                <td>Edit | Delete</td>
+              </tr>
+              <tr>
+                <td>Rocky Ridge</td>
+                <td>Edit | Delete</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 {% endblock content %}
