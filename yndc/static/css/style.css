@@ -48,10 +48,14 @@
 }
 
 .inline-input {
-    display:inline-block;
+    display: inline-block;
 }
 
 .inline-input input {
-    width:auto;
+    width: auto;
 }
 
+.action-buttons button {
+    float: left;
+    margin-right: 10px;
+}

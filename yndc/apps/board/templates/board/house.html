@@ -1,6 +1,17 @@
 {% extends "base_index.html" %}
 {% block content %}
-        <h1 class="page-header">{{ house.address }}</h1>
+        <h1>{{ house.address }}</h1>
+
+        {% if not is_mobile %}
+        <div class="action-buttons">
+            <button type="button" class="btn btn-default">Edit</button>
+            <button type="button" class="btn btn-default">Print</button>
+        </div>
+        <div style="clear:both"></div>
+        {% endif %}
+
+        <hr>
+
         <section>
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -98,8 +109,5 @@
                 </table>
             </div>
             {% endif %}
-
-            <button type="button" class="btn btn-default">Print</button>
-            <button type="button" class="btn btn-default">Edit</button>
         </section>
 {% endblock content %}
