@@ -1,10 +1,11 @@
 from django import forms
-from django.contrib.auth import login
+from django.conf import settings
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse
 from django.forms.models import modelformset_factory
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 
 from board.models import Board, House, Neighborhood
@@ -20,6 +21,14 @@ def login_user(request):
     else:
         form = AuthenticationForm()
     return render(request, 'board/login.html', {'form': form})
+
+
+def logout_user(request):
+    if not request.user.is_authenticated():
+        raise Http404()
+
+    logout(request)
+    return HttpResponseRedirect(settings.LOGIN_URL)
 
 
 @login_required()
