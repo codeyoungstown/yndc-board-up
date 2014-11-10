@@ -29,8 +29,13 @@ def list(request):
     houses = House.objects.active()
 
     if request.GET.get('neighborhood'):
-        ctx['neighborhood_slug'] = request.GET['neighborhood']
-        houses = houses.filter(neighborhood__slug=request.GET['neighborhood'])
+        try:
+            neighborhood_filter = Neighborhood.objects.get(slug=request.GET['neighborhood'])
+        except Neighborhood.DoesNotExist:
+            pass
+        else:
+            ctx['neighborhood_filter'] = neighborhood_filter
+            houses = houses.filter(neighborhood_id=neighborhood_filter.pk)
 
     ctx['houses'] = houses
     ctx['neighborhoods'] = Neighborhood.objects.all()

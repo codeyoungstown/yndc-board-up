@@ -1,16 +1,16 @@
 {% extends "base_index.html" %}
 {% block content %}
         <div class="btn-group list-actions">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            Filter <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            {% for neighborhood in neighborhoods %}
-            <li><a href="?neighborhood={{ neighborhood.slug }}">{{ neighborhood.name }}</a></li>
-            {% endfor %}
-            <li class="divider"></li>
-            <li><a href="/">ALL</a></li>
-          </ul>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="/">ALL</a></li>
+                <li class="divider"></li>
+                {% for neighborhood in neighborhoods %}
+                <li><a href="?neighborhood={{ neighborhood.slug }}">{{ neighborhood.name }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
 
         <a href="{% url 'add_house' %}" class="btn btn-default list-actions" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
