@@ -2,7 +2,7 @@
 {% block content %}
         <div class="btn-group list-actions">
           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            Filter by neighborhood <span class="caret"></span>
+            Filter <span class="caret"></span>
           </button>
           <ul class="dropdown-menu" role="menu">
             {% for neighborhood in neighborhoods %}
@@ -13,7 +13,7 @@
           </ul>
         </div>
 
-        <a href="{% url 'add_house' %}" class="btn btn-default list-actions" role="button"><span class="glyphicon glyphicon-plus"></span> Add Property</a>
+        <a href="{% url 'add_house' %}" class="btn btn-default list-actions" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
 
         <div style="clear:both"></div>
 
@@ -23,7 +23,9 @@
             <thead>
               <tr>
                 <th>Address</th>
+                {% if not is_mobile %}
                 <th>Neighborhood</th>
+                {% endif %}
                 <th>Actions</th>
               </tr>
             </thead>
@@ -33,7 +35,9 @@
                 <td>
                     <a href="{% url 'house' house.slug %}">{{ house.address }}</a>
                 </td>
+                {% if not is_mobile %}
                 <td>{{ house.neighborhood.name }}</td>
+                {% endif %}
                 <td>
                     <a href="" class="btn btn-default btn-sm" role="button">Edit</a>
                     <a href="{% url 'archive_house' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default btn-sm" role="button">Archive</a>
