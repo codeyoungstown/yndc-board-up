@@ -1,6 +1,6 @@
 {% extends "base_index.html" %}
 {% block content %}
-        <div class="btn-group list-actions">
+        <div class="btn-group filter-button">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
             </button>
@@ -13,7 +13,7 @@
             </ul>
         </div>
 
-        <a href="{% url 'add_house' %}" class="btn btn-default list-actions" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
+        <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
 
         <div style="clear:both"></div>
 

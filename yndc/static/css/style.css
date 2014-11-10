@@ -35,9 +35,12 @@
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.25) inset;
 }
 
-.list-actions {
+.add-button {
     float: right;
-    margin-left: 10px;
+}
+
+.filter-button {
+    float: left;
 }
 
 .photo-help {
