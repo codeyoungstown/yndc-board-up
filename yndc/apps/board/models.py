@@ -27,7 +27,8 @@ class Neighborhood(models.Model):
 class House(models.Model):
     address = models.CharField(max_length=255)
     slug = models.SlugField(blank=True)
-    neighborhood = models.ForeignKey(Neighborhood, blank=True, null=True)
+    neighborhood = models.ForeignKey(Neighborhood, blank=True, null=True,
+        on_delete=models.SET_NULL)
     notes = models.TextField(blank=True)
     photo = models.ImageField(upload_to='yndc-photos')
 

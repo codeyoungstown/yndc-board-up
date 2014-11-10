@@ -1,6 +1,6 @@
 from django import forms
 
-from board.models import Board, House
+from board.models import Board, House, Neighborhood
 
 
 class HouseForm(forms.ModelForm):
@@ -46,3 +46,9 @@ class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
         exclude = ['house']
+
+
+class NeighborhoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighborhood
+        exclude = ['slug']

@@ -13,7 +13,7 @@
           </ul>
         </div>
 
-        <a href="{% url 'add' %}" class="btn btn-default list-actions" role="button"><span class="glyphicon glyphicon-plus"></span> Add Property</a>
+        <a href="{% url 'add_house' %}" class="btn btn-default list-actions" role="button"><span class="glyphicon glyphicon-plus"></span> Add Property</a>
 
         <div style="clear:both"></div>
 
@@ -36,7 +36,7 @@
                 <td>{{ house.neighborhood.name }}</td>
                 <td>
                     <a href="" class="btn btn-default btn-sm" role="button">Edit</a>
-                    <a href="{% url 'archive' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default btn-sm" role="button">Archive</a>
+                    <a href="{% url 'archive_house' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default btn-sm" role="button">Archive</a>
                 </td>
               </tr>
               {% endfor %}

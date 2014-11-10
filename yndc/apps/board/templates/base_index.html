@@ -13,12 +13,12 @@
           </button>
           <a class="navbar-brand" href="/">YNDC</a>
         </div>
-    
+
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li{% if page == 'properties' %} class="active"{% endif %}><a href="{% url 'list' %}">Properties</a></li>
-            <li{% if page == 'neighborhoods' %}class="active"{% endif %}><a href="#">Neighborhoods</a></li>
+            <li{% if page == 'neighborhoods' %} class="active"{% endif %}><a href="{% url 'neighborhoods' %}">Neighborhoods</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

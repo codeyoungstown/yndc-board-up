@@ -5,11 +5,10 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse
 from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 
 from board.models import Board, House, Neighborhood
-from board.forms import BoardForm, HouseForm
+from board.forms import BoardForm, HouseForm, NeighborhoodForm
 
 
 def login_user(request):
@@ -20,8 +19,7 @@ def login_user(request):
             return HttpResponseRedirect(reverse('list'))
     else:
         form = AuthenticationForm()
-    return render_to_response('board/login.html', {'form': form},
-        context_instance=RequestContext(request))
+    return render(request, 'board/login.html', {'form': form})
 
 
 @login_required()
@@ -36,28 +34,17 @@ def list(request):
 
     ctx['houses'] = houses
     ctx['neighborhoods'] = Neighborhood.objects.all()
-    return render_to_response('board/list.html', ctx,
-        context_instance=RequestContext(request))
-
-
-@login_required
-def neighborhood(request, neighborhood_slug):
-    neighborhood = get_object_or_404(Neighborhood, slug=neighborhood_slug)
-    houses = House.objects.filter(neighborhood_id=neighborhood.pk)
-    return render_to_response('board/neighborhood.html',
-        {'neighborhood': neighborhood, 'houses': houses,
-        'page': 'neighborhoods'}, context_instance=RequestContext(request))
+    return render(request, 'board/list.html', ctx)
 
 
 @login_required
 def house(request, house_slug):
     house = get_object_or_404(House, slug=house_slug)
-    return render_to_response('board/house.html', {'house': house},
-        context_instance=RequestContext(request))
+    return render(request, 'board/house.html', {'house': house})
 
 
 @login_required
-def archive(request, house_slug):
+def archive_house(request, house_slug):
     house = get_object_or_404(House, slug=house_slug)
     house.archived = True
     house.save()
@@ -90,6 +77,32 @@ def add_house(request):
         house_form = HouseForm()
         board_formset = BoardFormSet(queryset=Board.objects.none())
 
-    return render_to_response('board/add_house.html',
-        {'house_form': house_form, 'board_formset': board_formset},
-        context_instance=RequestContext(request))
+    return render(request, 'board/add_house.html',
+        {'house_form': house_form, 'board_formset': board_formset})
+
+@login_required
+def neighborhoods(request):
+    return render(request, 'board/neighborhoods.html',
+        {'neighborhoods': Neighborhood.objects.all(), 'page': 'neighborhoods'})
+
+
+@login_required
+def add_neighborhood(request):
+    if request.method == 'POST':
+        form = NeighborhoodForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('neighborhoods'))
+    else:
+        form = NeighborhoodForm()
+
+    return render(request, 'board/add_neighborhood.html',
+        {'form': form})
+
+
+@login_required
+def delete_neighborhood(request, neighborhood_slug):
+    neighborhood = get_object_or_404(Neighborhood, slug=neighborhood_slug)
+    neighborhood.delete()
+    return HttpResponseRedirect(reverse('neighborhoods'))
