@@ -4,7 +4,6 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.urlresolvers import reverse
-from django.forms.models import modelformset_factory
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 
@@ -67,32 +66,17 @@ def archive_house(request, house_slug):
 
 @login_required
 def add_house(request):
-    widgets = {
-        'height': forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'height'}),
-        'width': forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'width'}),
-        'description': forms.TextInput(attrs={'class' : 'form-control', 'placeholder': 'description'})
-    }
-
-    BoardFormSet = modelformset_factory(Board, form=BoardForm, extra=2,
-        widgets=widgets)
-
     if request.method == 'POST':
         house_form = HouseForm(request.POST, request.FILES)
-        board_formset = BoardFormSet(request.POST, queryset=Board.objects.none())
 
-        if house_form.is_valid() and board_formset.is_valid():
+        if house_form.is_valid():
             house = house_form.save()
-            boards = board_formset.save(commit=False)
-            for board in boards:
-                board.house = house
-                board.save()
             return HttpResponseRedirect(reverse('house', args=[house.slug]))
     else:
         house_form = HouseForm()
-        board_formset = BoardFormSet(queryset=Board.objects.none())
 
     return render(request, 'board/add_house.html',
-        {'house_form': house_form, 'board_formset': board_formset})
+        {'house_form': house_form})
 
 @login_required
 def neighborhoods(request):
@@ -120,3 +104,35 @@ def delete_neighborhood(request, neighborhood_slug):
     neighborhood = get_object_or_404(Neighborhood, slug=neighborhood_slug)
     neighborhood.delete()
     return HttpResponseRedirect(reverse('neighborhoods'))
+
+
+@login_required
+def boards(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+    return render(request, 'board/boards.html', {'house': house})
+
+
+@login_required
+def add_board(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+
+    if request.method == 'POST':
+        form = BoardForm(request.POST)
+
+        if form.is_valid():
+            board = form.save(commit=False)
+            board.house = house
+            board.save()
+            return HttpResponseRedirect(reverse('boards', args=[house_slug]))
+    else:
+        form = BoardForm()
+
+    return render(request, 'board/add_board.html', {'house': house,
+        'form': form})
+
+
+@login_required
+def delete_board(request, house_slug, board_id):
+    board = get_object_or_404(Board, house__slug=house_slug, pk=board_id)
+    board.delete()
+    return HttpResponseRedirect(reverse('boards', args=[house_slug]))

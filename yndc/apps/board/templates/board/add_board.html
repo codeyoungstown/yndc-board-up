@@ -1,0 +1,53 @@
+{% extends "base_index.html" %}
+{% block content %}
+        <ol class="breadcrumb">
+          <li><a href="{% url 'list' %}">Properties</a></li>
+          <li><a href="{% url 'house' house.slug %}">{{ house.address }}</a></li>
+          <li><a href="{% url 'boards' house.slug %}">Boards</a></li>
+          <li class="active">Add Board</li>
+        </ol>
+
+        <section>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ house.address }} - Add Board</h3>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.description.errors %} has-error{% endif %}">
+                                    <label>Description</label>
+                                    <input type="text" name="description" placeholder="Description" {% if form.description.value %}value="{{ form.description.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.width.errors %} has-error{% endif %}">
+                                    <label>Width</label>
+                                    <input type="text" name="width" placeholder="Width" {% if form.width.value %}value="{{ form.width.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.height.errors %} has-error{% endif %}">
+                                    <label>Height</label>
+                                    <input type="text" name="height" placeholder="Height" {% if form.height.value %}value="{{ form.height.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </section>
+{% endblock content %}

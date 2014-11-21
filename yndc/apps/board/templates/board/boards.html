@@ -1,0 +1,37 @@
+{% extends "base_index.html" %}
+{% block content %}
+        <ol class="breadcrumb">
+          <li><a href="{% url 'list' %}">Properties</a></li>
+          <li><a href="{% url 'house' house.slug %}">{{ house.address }}</a></li>
+          <li class="active">Boards</li>
+        </ol>
+
+        <a href="{% url 'add_board' house.slug %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New Board</a>
+
+        <div style="clear:both"></div>
+
+        <hr>
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Size</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for board in house.boards.all %}
+              <tr>
+                <td>
+                    <p>{{ board.description }}</p>
+                </td>
+                <td>{{ board.width }}W x {{ board.height }}H</td>
+                <td>
+                    <a href="{% url 'delete_board' house.slug board.pk %}" onclick="return confirm('Delete this board?')" class="btn btn-default btn-sm" role="button">Delete</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+{% endblock content %}

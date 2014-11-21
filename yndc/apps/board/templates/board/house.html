@@ -1,9 +1,15 @@
 {% extends "base_index.html" %}
 {% block content %}
+        <ol class="breadcrumb">
+          <li><a href="{% url 'list' %}">Properties</a></li>
+          <li class="active">{{ house.address }}</li>
+        </ol>
+
         <h1>{{ house.address }}</h1>
 
         {% if not is_mobile %}
         <div class="action-buttons">
+            <a href="{% url 'boards' house.slug %}" class="btn btn-default" role="button">Manage Boards</a>
             <button type="button" class="btn btn-default">Edit</button>
             <button type="button" class="btn btn-default">Print</button>
         </div>
