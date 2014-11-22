@@ -1,4 +1,3 @@
-from django import forms
 from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -70,7 +69,9 @@ def add_house(request):
         house_form = HouseForm(request.POST, request.FILES)
 
         if house_form.is_valid():
-            house = house_form.save()
+            house = house_form.save(commit=False)
+            house.created_by = request.user
+            house.save()
             return HttpResponseRedirect(reverse('house', args=[house.slug]))
     else:
         house_form = HouseForm()

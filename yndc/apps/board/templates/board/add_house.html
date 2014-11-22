@@ -3,7 +3,6 @@
         <section>
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ board_formset.management_form }}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">Add Property</h3>
@@ -50,6 +49,28 @@
                         </tr>
                         <tr>
                             <td>
+                                <div class="form-group{% if house_form.status.errors %} has-error{% endif %}">
+                                    <label>Status</label>
+                                    <select name="status" class="form-control">
+                                    {% for k, v in house_form.status.field.choices %}
+                                    <option value="{{ k }}"{% if house_form.status.value == v %} selected="selected"{% endif %}>{{ v }}</option>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if house_form.requested_by.errors %} has-error{% endif %}">
+                                    <label>Requested By</label>
+                                    <select name="requested_by" class="form-control">
+                                    {% for k, v in house_form.requested_by.field.choices %}
+                                    <option value="{{ k }}"{% if house_form.requested_by.value == v %} selected="selected"{% endif %}>{{ v }}</option>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <label>Outside</label>
                                 <div class="form-group">
                                     {% for field in house_form.outside_checklist_fields %}
@@ -88,24 +109,6 @@
                                     </div>
                                     {% endfor %}
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <h5>Boards</h5>
-                                <hr>
-                                {% for form in board_formset.forms %}
-                                <div class="row">
-                                    <label class="col-sm-1 control-label">Board {{ forloop.counter }}</label>
-                                    <div class="col-sm-10">
-                                    {% for field in form.visible_fields %}
-                                        <div class="form-group inline-input">
-                                            {{ field }}
-                                        </div>
-                                    {% endfor %}
-                                    </div>
-                                </div>
-                                {% endfor %}
                             </td>
                         </tr>
                         <tr>

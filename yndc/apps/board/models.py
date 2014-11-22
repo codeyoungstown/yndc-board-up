@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 
@@ -25,12 +26,37 @@ class Neighborhood(models.Model):
 
 
 class House(models.Model):
+    STATUS_SECURE = 'secure'
+    STATUS_INSECURE = 'insecure'
+
+    STATUS_CHOICES = (
+        (STATUS_SECURE, 'Secure'),
+        (STATUS_INSECURE, 'Insecure'),
+    )
+
+    REQUESTED_BY_YNDC = 'Y'
+    REQUESTED_BY_CITY = 'C'
+    REQUESTED_BY_NEIGHBORHOOD = 'N'
+
+    REQUESTED_BY = (
+        (REQUESTED_BY_YNDC, 'YNDC'),
+        (REQUESTED_BY_CITY, 'City'),
+        (REQUESTED_BY_NEIGHBORHOOD, 'Neighborhood'),
+    )
+
     address = models.CharField(max_length=255)
-    slug = models.SlugField(blank=True)
+    slug = models.SlugField(blank=True, db_index=True)
     neighborhood = models.ForeignKey(Neighborhood, blank=True, null=True,
         on_delete=models.SET_NULL)
     notes = models.TextField(blank=True)
     photo = models.ImageField(upload_to='yndc-photos')
+    status = models.CharField(max_length=8, choices=STATUS_CHOICES,
+        default=STATUS_SECURE)
+    requested_by = models.CharField(max_length=8, choices=REQUESTED_BY,
+        default=REQUESTED_BY_YNDC)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(User)
 
     archived = models.BooleanField(default=False)
 

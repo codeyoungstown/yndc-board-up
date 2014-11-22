@@ -6,7 +6,7 @@ from board.models import Board, House, Neighborhood
 class HouseForm(forms.ModelForm):
     class Meta:
         model = House
-        exclude = ['slug']
+        exclude = ['slug', 'created_by', 'created_at']
 
     def _list_checklist(self, prefix):
 
