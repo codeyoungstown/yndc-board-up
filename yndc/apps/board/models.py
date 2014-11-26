@@ -179,3 +179,36 @@ class Board(models.Model):
 
     def __unicode__(self):
         return '%s - %s H x %s W' % (self.description, self.height, self.width)
+
+
+class Event(models.Model):
+    
+    EVENT_TYPE_VACANT_CLEANUP = 'vacant-cleanup'
+    EVENT_TYPE_OCCUPIED_REPAIR = 'occupied-repair'
+    EVENT_TYPE_VACANT_REHAB = 'vacant-rehab'
+    EVENT_TYPE_VACANT_LOT = 'vacant-lot'
+
+    EVENT_TYPES = (
+        (EVENT_TYPE_VACANT_CLEANUP, 'Vacant cleanup'),
+        (EVENT_TYPE_OCCUPIED_REPAIR, 'Occupied repair'),
+        (EVENT_TYPE_VACANT_REHAB, 'Vacant rehab'),
+        (EVENT_TYPE_VACANT_LOT, 'Vacant lot reuse')
+    )
+
+    house = models.ForeignKey(House, related_name='events')
+    date = models.DateTimeField()
+    type = models.CharField(max_length=8, choices=EVENT_TYPES,
+        default=EVENT_TYPE_VACANT_CLEANUP)
+
+    created_by = models.ForeignKey(User)
+
+    # Counts
+    tires_picked_up = models.PositiveIntegerField(help_text='Tires picked up.')
+    bags_of_trash = models.PositiveIntegerField(help_text='Bags of trash removed.')
+    cubic_yards_of_debris = models.PositiveIntegerField(help_text='Cubic yards of debris removed.')
+    linear_feet_sidewalk_scraped = models.PositiveIntegerField(help_text='Linear feer of sidewalk scraped.')
+    boards_cut = models.PositiveIntegerField(help_text='Boards cut.')
+    vacant_structures_cleaned = models.PositiveIntegerField(help_text='Vacant structures boarded / cleaned up.')
+    vacant_lots_repurposed = models.PositiveIntegerField(help_text='Vacant lots repurposed.')
+    occupied_homes_repaired = models.PositiveIntegerField(help_text='Occupied homes repaired.')
+    vacant_homes_rehabed = models.PositiveIntegerField(help_text='Vacant homes repaired.')
