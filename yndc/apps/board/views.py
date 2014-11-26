@@ -79,6 +79,13 @@ def add_house(request):
     return render(request, 'board/add_house.html',
         {'house_form': house_form})
 
+
+@login_required
+def print_house(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+    return render(request, 'board/print.html', {'house': house})
+
+
 @login_required
 def neighborhoods(request):
     return render(request, 'board/neighborhoods.html',

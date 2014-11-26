@@ -11,7 +11,7 @@
         <div class="action-buttons">
             <a href="{% url 'boards' house.slug %}" class="btn btn-default" role="button">Manage Boards</a>
             <button type="button" class="btn btn-default">Edit</button>
-            <button type="button" class="btn btn-default">Print</button>
+            <a href="{% url 'print_house' house.slug %}" class="btn btn-default" role="button">Print</a>
         </div>
         <div style="clear:both"></div>
         {% endif %}
