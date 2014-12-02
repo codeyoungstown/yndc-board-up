@@ -1,0 +1,37 @@
+{% extends "base_index.html" %}
+{% block content %}
+        <ol class="breadcrumb">
+          <li><a href="{% url 'list' %}">Properties</a></li>
+          <li><a href="{% url 'house' house.slug %}">{{ house.address }}</a></li>
+          <li class="active">Events</li>
+        </ol>
+
+        <a href="{% url 'add_event' house.slug %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New Event</a>
+
+        <div style="clear:both"></div>
+
+        <hr>
+
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for event in house.events.active %}
+              <tr>
+                <td>
+                    <a href="{% url 'event' house.slug event.pk %}">{{ event.date }}</a>
+                </td>
+                <td>{{ event.get_type_display }}</td>
+                <td>
+                    <a href="{% url 'archive_event' house.slug event.pk %}" onclick="return confirm('Archive this event?')" class="btn btn-default btn-sm" role="button">Archive</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+{% endblock content %}

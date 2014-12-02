@@ -6,8 +6,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
 
-from board.models import Board, House, Neighborhood
-from board.forms import BoardForm, HouseForm, NeighborhoodForm
+from board.models import Board, Event, House, Neighborhood
+from board.forms import BoardForm, EventForm, HouseForm, NeighborhoodForm
 
 
 def login_user(request):
@@ -144,3 +144,43 @@ def delete_board(request, house_slug, board_id):
     board = get_object_or_404(Board, house__slug=house_slug, pk=board_id)
     board.delete()
     return HttpResponseRedirect(reverse('boards', args=[house_slug]))
+
+
+@login_required
+def events(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+    return render(request, 'board/events.html', {'house': house})
+
+
+@login_required
+def event(request, house_slug, event_id):
+    event = get_object_or_404(Event, house__slug=house_slug, pk=event_id)
+    return render(request, 'board/event.html', {'event': event})
+
+
+@login_required
+def add_event(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+
+    if request.method == 'POST':
+        form = EventForm(request.POST)
+
+        if form.is_valid():
+            event = form.save(commit=False)
+            event.house = house
+            event.created_by = request.user
+            event.save()
+            return HttpResponseRedirect(reverse('events', args=[house_slug]))
+    else:
+        form = EventForm()
+
+    return render(request, 'board/add_event.html', {'house': house,
+        'form': form})
+
+
+@login_required
+def archive_event(request, house_slug, event_id):
+    event = get_object_or_404(Event, house__slug=house_slug, pk=event_id)
+    event.archived = True
+    event.save()
+    return HttpResponseRedirect(reverse('events', args=[house_slug]))

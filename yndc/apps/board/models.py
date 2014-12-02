@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 
-from board.managers import HouseManager
+from board.managers import EventManager, HouseManager
 
 
 class Neighborhood(models.Model):
@@ -182,7 +182,6 @@ class Board(models.Model):
 
 
 class Event(models.Model):
-    
     EVENT_TYPE_VACANT_CLEANUP = 'vacant-cleanup'
     EVENT_TYPE_OCCUPIED_REPAIR = 'occupied-repair'
     EVENT_TYPE_VACANT_REHAB = 'vacant-rehab'
@@ -197,10 +196,12 @@ class Event(models.Model):
 
     house = models.ForeignKey(House, related_name='events')
     date = models.DateTimeField()
-    type = models.CharField(max_length=8, choices=EVENT_TYPES,
+    type = models.CharField(max_length=255, choices=EVENT_TYPES,
         default=EVENT_TYPE_VACANT_CLEANUP)
 
     created_by = models.ForeignKey(User)
+
+    archived = models.BooleanField(default=False)
 
     # Counts
     tires_picked_up = models.PositiveIntegerField(help_text='Tires picked up.')
@@ -212,3 +213,5 @@ class Event(models.Model):
     vacant_lots_repurposed = models.PositiveIntegerField(help_text='Vacant lots repurposed.')
     occupied_homes_repaired = models.PositiveIntegerField(help_text='Occupied homes repaired.')
     vacant_homes_rehabed = models.PositiveIntegerField(help_text='Vacant homes repaired.')
+
+    objects = EventManager()

@@ -1,0 +1,114 @@
+{% extends "base_index.html" %}
+{% block content %}
+        <section>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add Event</h3>
+                    </div>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.date.errors %} has-error{% endif %}">
+                                    <label>Date</label>
+                                    <input type="text" name="date" placeholder="mm/dd/yyyy" {% if form.date.value %}value="{{ form.date.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.type.errors %} has-error{% endif %}">
+                                    <label>Type</label>
+                                    <select name="type" class="form-control">
+                                    {% for k, v in form.type.field.choices %}
+                                    <option value="{{ k }}"{% if form.type.value == v %} selected="selected"{% endif %}>{{ v }}</option>
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.tires_picked_up.errors %} has-error{% endif %}">
+                                    <label>{{ form.tires_picked_up.help_text }}</label>
+                                    <input type="text" name="tires_picked_up" placeholder="0" {% if form.tires_picked_up.value %}value="{{ form.tires_picked_up.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.bags_of_trash.errors %} has-error{% endif %}">
+                                    <label>{{ form.bags_of_trash.help_text }}</label>
+                                    <input type="text" name="bags_of_trash" placeholder="0" {% if form.bags_of_trash.value %}value="{{ form.bags_of_trash.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.cubic_yards_of_debris.errors %} has-error{% endif %}">
+                                    <label>{{ form.cubic_yards_of_debris.help_text }}</label>
+                                    <input type="text" name="cubic_yards_of_debris" placeholder="0" {% if form.cubic_yards_of_debris.value %}value="{{ form.cubic_yards_of_debris.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.linear_feet_sidewalk_scraped.errors %} has-error{% endif %}">
+                                    <label>{{ form.linear_feet_sidewalk_scraped.help_text }}</label>
+                                    <input type="text" name="linear_feet_sidewalk_scraped" placeholder="0" {% if form.linear_feet_sidewalk_scraped.value %}value="{{ form.linear_feet_sidewalk_scraped.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.boards_cut.errors %} has-error{% endif %}">
+                                    <label>{{ form.boards_cut.help_text }}</label>
+                                    <input type="text" name="boards_cut" placeholder="0" {% if form.boards_cut.value %}value="{{ form.boards_cut.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.vacant_structures_cleaned.errors %} has-error{% endif %}">
+                                    <label>{{ form.vacant_structures_cleaned.help_text }}</label>
+                                    <input type="text" name="vacant_structures_cleaned" placeholder="0" {% if form.vacant_structures_cleaned.value %}value="{{ form.vacant_structures_cleaned.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.vacant_lots_repurposed.errors %} has-error{% endif %}">
+                                    <label>{{ form.vacant_lots_repurposed.help_text }}</label>
+                                    <input type="text" name="vacant_lots_repurposed" placeholder="0" {% if form.vacant_lots_repurposed.value %}value="{{ form.vacant_lots_repurposed.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.occupied_homes_repaired.errors %} has-error{% endif %}">
+                                    <label>{{ form.occupied_homes_repaired.help_text }}</label>
+                                    <input type="text" name="occupied_homes_repaired" placeholder="0" {% if form.occupied_homes_repaired.value %}value="{{ form.occupied_homes_repaired.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group{% if form.vacant_homes_rehabed.errors %} has-error{% endif %}">
+                                    <label>{{ form.vacant_homes_rehabed.help_text }}</label>
+                                    <input type="text" name="vacant_homes_rehabed" placeholder="0" {% if form.vacant_homes_rehabed.value %}value="{{ form.vacant_homes_rehabed.value }}"{% endif %} class="form-control">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </form>
+        </section>
+{% endblock content %}

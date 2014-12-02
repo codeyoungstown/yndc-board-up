@@ -1,0 +1,56 @@
+{% extends "base_index.html" %}
+{% block content %}
+        <ol class="breadcrumb">
+          <li><a href="{% url 'list' %}">Properties</a></li>
+          <li><a href="{% url 'house' event.house.slug %}">{{ event.house.address }}</a></li>
+          <li><a href="{% url 'events' event.house.slug %}">Events</a></li>
+          <li class="active">Event</li>
+        </ol>
+
+        <h1>{{ house.address }} Event - {{ event.date }}</h1>
+
+        {% if not is_mobile %}
+        <div class="action-buttons">
+            <button type="button" class="btn btn-default">Edit</button>
+        </div>
+        <div style="clear:both"></div>
+        {% endif %}
+
+        <hr>
+
+        <section>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basic Info</h3>
+                </div>
+                <div class="panel-body">
+                    <p><b>Date:</b> {{ event.date }}</p>
+                    <p><b>Type:</b> {{ event.get_type_display }}</p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Counts</h3>
+                </div>
+                <div class="panel-body">
+                    <p><b>Tires picked up:</b> {{ event.tires_picked_up }}</p>
+                    <p><b>Bags of trash removed:</b> {{ event.bags_of_trash }}</p>
+                    <p><b>Cubic yards of debris removed:</b> {{ event.cubic_yards_of_debris }}</p>
+                    <p><b>Linear feer of sidewalk scraped:</b> {{ event.linear_feet_sidewalk_scraped }}</p>
+                    <p><b>Boards cut:</b> {{ event.boards_cut }}</p>
+                    <p><b>Vacant structures boarded / cleaned up:</b> {{ event.vacant_structures_cleaned }}</p>
+                    <p><b>Vacant lots repurposed:</b> {{ event.vacant_lots_repurposed }}</p>
+                    <p><b>Occupied homes repaired:</b> {{ event.occupied_homes_repaired }}</p>
+                    <p><b>Vacant homes repaired:</b> {{ event.vacant_homes_rehabed }}</p>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Meta</h3>
+                </div>
+                <div class="panel-body">
+                    <p><b>Added by:</b> {{ event.created_by.get_full_name }}</p>
+                </div>
+            </div>
+        </section>
+{% endblock content %}

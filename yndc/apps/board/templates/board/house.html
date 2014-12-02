@@ -10,6 +10,7 @@
         {% if not is_mobile %}
         <div class="action-buttons">
             <a href="{% url 'boards' house.slug %}" class="btn btn-default" role="button">Manage Boards</a>
+            <a href="{% url 'events' house.slug %}" class="btn btn-default" role="button">Manage Events</a>
             <button type="button" class="btn btn-default">Edit</button>
             <a href="{% url 'print_house' house.slug %}" class="btn btn-default" role="button">Print</a>
         </div>
