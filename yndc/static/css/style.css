@@ -55,7 +55,7 @@
     width: auto;
 }
 
-.action-buttons button {
+.action-buttons button, .action-buttons a {
     float: left;
     margin-right: 10px;
 }
