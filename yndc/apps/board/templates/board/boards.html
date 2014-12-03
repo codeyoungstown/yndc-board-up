@@ -12,6 +12,7 @@
 
         <hr>
 
+        {% if house.boards.all %}
         <table class="table table-striped">
             <thead>
               <tr>
@@ -34,4 +35,7 @@
               {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <small>No boards exist for this house.</small>
+        {% endif %}
 {% endblock content %}
