@@ -203,3 +203,20 @@ def archive_event(request, house_slug, event_id):
     event.archived = True
     event.save()
     return HttpResponseRedirect(reverse('events', args=[house_slug]))
+
+
+@login_required
+def edit_event(request, house_slug, event_id):
+    event = get_object_or_404(Event, house__slug=house_slug, pk=event_id)
+
+    if request.method == 'POST':
+        form = EventForm(request.POST, instance=event)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('events', args=[house_slug]))
+    else:
+        form = EventForm(instance=event)
+
+    return render(request, 'board/add_event.html', {'house': event.house,
+        'form': form})

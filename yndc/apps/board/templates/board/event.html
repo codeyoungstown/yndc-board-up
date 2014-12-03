@@ -11,7 +11,7 @@
 
         {% if not is_mobile %}
         <div class="action-buttons">
-            <button type="button" class="btn btn-default">Edit</button>
+            <a href="{% url 'edit_event' event.house.slug event.pk %}" class="btn btn-default" role="button">Edit</a>
         </div>
         <div style="clear:both"></div>
         {% endif %}

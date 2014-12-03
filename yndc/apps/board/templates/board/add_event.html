@@ -12,7 +12,7 @@
                             <td>
                                 <div class="form-group{% if form.date.errors %} has-error{% endif %}">
                                     <label>Date</label>
-                                    <input type="text" name="date" placeholder="mm/dd/yyyy" {% if form.date.value %}value="{{ form.date.value }}"{% endif %} class="form-control">
+                                    <input type="text" name="date" placeholder="mm/dd/yyyy" {% if form.date.value %}value="{{ form.date.value|date:"m/d/Y" }}"{% endif %} class="form-control">
                                 </div>
                             </td>
                         </tr>
