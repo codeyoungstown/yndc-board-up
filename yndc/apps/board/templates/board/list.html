@@ -19,6 +19,7 @@
 
         <hr>
 
+        {% if houses %}
         <table class="table table-striped">
             <thead>
               <tr>
@@ -52,4 +53,7 @@
               {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <small>No properties exist.</small>
+        {% endif %}
 {% endblock content %}

@@ -6,6 +6,7 @@
 
         <hr>
 
+        {% if neighborhoods %}
         <table class="table table-striped">
             <thead>
               <tr>
@@ -24,4 +25,7 @@
               {% endfor %}
             </tbody>
         </table>
+        {% else %}
+        <small>No neighborhoods exist.</small>
+        {% endif %}
 {% endblock content %}
