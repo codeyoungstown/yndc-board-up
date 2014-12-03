@@ -81,6 +81,25 @@ def add_house(request):
 
 
 @login_required
+def edit_house(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+
+    if request.method == 'POST':
+        house_form = HouseForm(request.POST, request.FILES, instance=house)
+
+        if house_form.is_valid():
+            house = house_form.save(commit=False)
+            house.created_by = request.user
+            house.save()
+            return HttpResponseRedirect(reverse('house', args=[house.slug]))
+    else:
+        house_form = HouseForm(instance=house)
+
+    return render(request, 'board/add_house.html',
+        {'house_form': house_form})
+
+
+@login_required
 def print_house(request, house_slug):
     house = get_object_or_404(House, slug=house_slug)
     return render(request, 'board/print.html', {'house': house})

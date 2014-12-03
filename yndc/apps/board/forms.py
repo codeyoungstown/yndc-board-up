@@ -14,6 +14,10 @@ class HouseForm(forms.ModelForm):
         if hasattr(self, 'cleaned_data'):
             cleaned_data = self.cleaned_data
 
+        initial = {}
+        if hasattr(self, 'initial'):
+            initial = self.initial
+
         fields = []
         for field in self.fields.items():
             if field[0].startswith('%s_check' % prefix):
@@ -22,11 +26,17 @@ class HouseForm(forms.ModelForm):
                     'name': field[0],
                     'field': field[1],
                 }
-
-                try:
-                    obj['value'] = cleaned_data[field[0]]
-                except KeyError:
-                    pass
+                
+                if cleaned_data:
+                    try:
+                        obj['value'] = cleaned_data[field[0]]
+                    except KeyError:
+                        pass
+                else:
+                    try:
+                        obj['value'] = initial[field[0]]
+                    except KeyError:
+                        pass
 
                 fields.append(obj)
 
