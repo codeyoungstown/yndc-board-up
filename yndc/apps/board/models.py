@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.text import slugify
 
+from easy_thumbnails.fields import ThumbnailerImageField
+
 from board.managers import EventManager, HouseManager
 
 
@@ -49,7 +51,7 @@ class House(models.Model):
     neighborhood = models.ForeignKey(Neighborhood, blank=True, null=True,
         on_delete=models.SET_NULL)
     notes = models.TextField(blank=True)
-    photo = models.ImageField(upload_to='yndc-photos')
+    photo = ThumbnailerImageField(upload_to='yndc-photos')
     status = models.CharField(max_length=8, choices=STATUS_CHOICES,
         default=STATUS_SECURE)
     requested_by = models.CharField(max_length=8, choices=REQUESTED_BY,

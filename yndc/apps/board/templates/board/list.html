@@ -37,7 +37,7 @@
               {% for house in houses %}
               <tr>
                 {% if not is_mobile %}
-                <td><a href="{% url 'house' house.slug %}"><img src="{{ house.photo.url }}" height="50" width="50"></a></td>
+                <td><a href="{% url 'house' house.slug %}"><img src="{{ house.photo.small.url }}" height="50" width="50"></a></td>
                 {% endif %}
                 <td>
                     <a href="{% url 'house' house.slug %}">{{ house.address }}</a>

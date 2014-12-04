@@ -53,7 +53,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'board'
+    'board',
+    'easy_thumbnails'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,7 +106,15 @@ STATICFILES_DIRS = (
 LOGIN_URL = '/login/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
 AWS_ACCESS_KEY_ID = ''
 AWS_SECRET_ACCESS_KEY = ''
 AWS_STORAGE_BUCKET_NAME = ''
+
+THUMBNAIL_ALIASES = {
+    'board.House.photo': {
+        'small': {'size': (50, 50), 'crop': True},
+        'medium': {'size': (400, 400), 'crop': True},
+    },
+}

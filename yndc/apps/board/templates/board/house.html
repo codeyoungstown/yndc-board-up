@@ -31,9 +31,10 @@
                     {% endif %}
                     <p><b>Status:</b> {{ house.get_status_display }}</p>
                     <p><b>Requested By:</b> {{ house.get_requested_by_display }}</p>
-                    <p><b>Photo:</b></p>
                     {% if house.photo %}
-                    <img src="{{ house.photo.url }}">
+                    <p><b>Photo:</b></p>
+                    <img src="{{ house.photo.medium.url }}">
+                    <p><small><a href="{{ house.photo.url }}">Click here for the full size photo.</a></small></p>
                     {% endif %}
                 </div>
             </div>
