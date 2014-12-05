@@ -29,8 +29,8 @@
                 </td>
                 <td>{{ event.get_type_display }}</td>
                 <td>
-                    <a href="{% url 'edit_event' house.slug event.pk %}" class="btn btn-default btn-sm" role="button">Edit</a>
-                    <a href="{% url 'archive_event' house.slug event.pk %}" onclick="return confirm('Archive this event?')" class="btn btn-default btn-sm" role="button">Archive</a>
+                    <a href="{% url 'edit_event' house.slug event.pk %}" class="btn btn-default" role="button">Edit</a>
+                    <a href="{% url 'archive_event' house.slug event.pk %}" onclick="return confirm('Archive this event?')" class="btn btn-default" role="button">Archive</a>
                 </td>
               </tr>
               {% endfor %}

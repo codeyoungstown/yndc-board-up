@@ -47,7 +47,7 @@
                 {% endif %}
                 <td>
                     <a href="{% url 'edit_house' house.slug %}" class="btn btn-default" role="button">Edit</a>
-                    <a href="{% url 'archive_house' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default btn-sm" role="button">Archive</a>
+                    <a href="{% url 'archive_house' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default" role="button">Archive</a>
                 </td>
               </tr>
               {% endfor %}

@@ -29,7 +29,7 @@
                 </td>
                 <td>{{ board.width }}W x {{ board.height }}H</td>
                 <td>
-                    <a href="{% url 'delete_board' house.slug board.pk %}" onclick="return confirm('Delete this board?')" class="btn btn-default btn-sm" role="button">Delete</a>
+                    <a href="{% url 'delete_board' house.slug board.pk %}" onclick="return confirm('Delete this board?')" class="btn btn-default" role="button">Delete</a>
                 </td>
               </tr>
               {% endfor %}

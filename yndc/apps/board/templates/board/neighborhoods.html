@@ -19,7 +19,7 @@
               <tr>
                 <td>{{ neighborhood.name }}</td>
                 <td>
-                    <a href="{% url 'delete_neighborhood' neighborhood.slug %}" onclick="return confirm('Delete this neighborhood?')" class="btn btn-default btn-sm" role="button">Delete</a>
+                    <a href="{% url 'delete_neighborhood' neighborhood.slug %}" onclick="return confirm('Delete this neighborhood?')" class="btn btn-default" role="button">Delete</a>
                 </td>
               </tr>
               {% endfor %}
