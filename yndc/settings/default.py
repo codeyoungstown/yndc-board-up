@@ -68,9 +68,9 @@ MIDDLEWARE_CLASSES = (
     'board.middleware.mobile.MobileMiddleware'
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'yndc.urls'
 
-WSGI_APPLICATION = 'wsgi.application'
+WSGI_APPLICATION = 'yndc.wsgi.application'
 
 
 # Database
