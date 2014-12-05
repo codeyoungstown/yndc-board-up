@@ -115,6 +115,7 @@ AWS_STORAGE_BUCKET_NAME = ''
 THUMBNAIL_ALIASES = {
     'board.House.photo': {
         'small': {'size': (50, 50), 'crop': True},
-        'medium': {'size': (400, 400), 'crop': True},
+        'medium': {'size': (250, 250), 'crop': True},
+        'large': {'size': (450, 450), 'crop': True},
     },
 }
