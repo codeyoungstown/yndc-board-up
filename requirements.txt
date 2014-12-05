@@ -3,5 +3,5 @@ django-storages==1.1.8
 Pillow==2.6.0
 boto
 easy-thumbnails
-gunicorn==0.14.3
+gunicorn==0.19.1.1
 dj-database-url
