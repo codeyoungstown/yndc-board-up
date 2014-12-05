@@ -1,1 +1,1 @@
-web: gunicorn yndc.wsgi -b 0.0.0.0:$PORT
+web: gunicorn wsgi -b 0.0.0.0:$PORT
