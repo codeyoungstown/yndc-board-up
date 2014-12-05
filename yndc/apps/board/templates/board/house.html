@@ -7,15 +7,15 @@
 
         <h1>{{ house.address }}</h1>
 
-        {% if not is_mobile %}
         <div class="action-buttons">
             <a href="{% url 'boards' house.slug %}" class="btn btn-default" role="button">Manage Boards</a>
             <a href="{% url 'events' house.slug %}" class="btn btn-default" role="button">Manage Events</a>
             <a href="{% url 'edit_house' house.slug %}" class="btn btn-default" role="button">Edit</a>
+            {% if not is_mobile %}
             <a href="{% url 'print_house' house.slug %}" class="btn btn-default" role="button">Print</a>
+            {% endif %}
         </div>
         <div style="clear:both"></div>
-        {% endif %}
 
         <hr>
 
