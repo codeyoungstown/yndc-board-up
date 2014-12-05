@@ -8,8 +8,8 @@
         <h1>{{ house.address }}</h1>
 
         <div class="action-buttons">
-            <a href="{% url 'boards' house.slug %}" class="btn btn-default" role="button">Manage Boards</a>
-            <a href="{% url 'events' house.slug %}" class="btn btn-default" role="button">Manage Events</a>
+            <a href="{% url 'boards' house.slug %}" class="btn btn-default" role="button">{% if not is_mobile %}Manage {% endif %}Boards</a>
+            <a href="{% url 'events' house.slug %}" class="btn btn-default" role="button">{% if not is_mobile %}Manage {% endif %}Events</a>
             <a href="{% url 'edit_house' house.slug %}" class="btn btn-default" role="button">Edit</a>
             {% if not is_mobile %}
             <a href="{% url 'print_house' house.slug %}" class="btn btn-default" role="button">Print</a>
@@ -33,7 +33,11 @@
                     <p><b>Requested By:</b> {{ house.get_requested_by_display }}</p>
                     {% if house.photo %}
                     <p><b>Photo:</b></p>
+                    {% if not is_mobile %}
+                    <img src="{{ house.photo.large.url }}">
+                    {% else %}
                     <img src="{{ house.photo.medium.url }}">
+                    {% endif %}
                     <p><small><a href="{{ house.photo.url }}">Click here for the full size photo.</a></small></p>
                     {% endif %}
                 </div>
