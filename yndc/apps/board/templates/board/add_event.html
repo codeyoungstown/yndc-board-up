@@ -1,5 +1,12 @@
 {% extends "base_index.html" %}
 {% block content %}
+        <ol class="breadcrumb">
+          <li><a href="{% url 'list' %}">Properties</a></li>
+          <li><a href="{% url 'house' house.slug %}">{{ house.address }}</a></li>
+          <li><a href="{% url 'events' house.slug %}">Events</a></li>
+          <li class="active">Add Event</li>
+        </ol>
+
         <section>
             <form action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
