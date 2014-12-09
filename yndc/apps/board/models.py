@@ -175,8 +175,8 @@ class House(models.Model):
 
 class Board(models.Model):
     house = models.ForeignKey(House, related_name='boards')
-    width = models.IntegerField()
-    height = models.IntegerField()
+    width = models.DecimalField(max_digits=5, decimal_places=2)
+    height = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.CharField(max_length=255)
 
     def __unicode__(self):
