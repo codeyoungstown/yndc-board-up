@@ -64,6 +64,13 @@ def archive_house(request, house_slug):
 
 
 @login_required
+def delete_house(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+    house.delete()
+    return HttpResponseRedirect(reverse('list'))
+
+
+@login_required
 def add_house(request):
     if request.method == 'POST':
         house_form = HouseForm(request.POST, request.FILES)
