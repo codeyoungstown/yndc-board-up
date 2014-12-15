@@ -120,4 +120,9 @@ THUMBNAIL_ALIASES = {
         'medium': {'size': (250, 250), 'crop': True},
         'large': {'size': (450, 450), 'crop': True},
     },
+    'board.House.additional_photo': {
+        'small': {'size': (50, 50), 'crop': True},
+        'medium': {'size': (250, 250), 'crop': True},
+        'large': {'size': (450, 450), 'crop': True},
+    },
 }

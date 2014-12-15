@@ -31,14 +31,24 @@
                     {% endif %}
                     <p><b>Status:</b> {{ house.get_status_display }}</p>
                     <p><b>Requested By:</b> {{ house.get_requested_by_display }}</p>
+
                     {% if house.photo %}
-                    <p><b>Photo:</b></p>
-                    {% if not is_mobile %}
-                    <img src="{{ house.photo.large.url }}">
-                    {% else %}
-                    <img src="{{ house.photo.medium.url }}">
+                        <p><b>Photo:</b></p>
+                        {% if not is_mobile %}
+                        <img src="{{ house.photo.large.url }}">
+                        {% else %}
+                        <img src="{{ house.photo.medium.url }}">
+                        {% endif %}
+                        <p><small><a href="{{ house.photo.url }}">Click here for the full size photo.</a></small></p>
                     {% endif %}
-                    <p><small><a href="{{ house.photo.url }}">Click here for the full size photo.</a></small></p>
+
+                    {% if house.additional_photo %}
+                        {% if not is_mobile %}
+                        <img src="{{ house.additional_photo.large.url }}">
+                        {% else %}
+                        <img src="{{ house.additional_photo.medium.url }}">
+                        {% endif %}
+                        <p><small><a href="{{ house.additional_photo.url }}">Click here for the full size photo.</a></small></p>
                     {% endif %}
                 </div>
             </div>

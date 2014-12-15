@@ -52,6 +52,7 @@ class House(models.Model):
         on_delete=models.SET_NULL)
     notes = models.TextField(blank=True)
     photo = ThumbnailerImageField(upload_to='yndc-photos')
+    additional_photo = ThumbnailerImageField(upload_to='yndc-photos', blank=True)
     status = models.CharField(max_length=9, choices=STATUS_CHOICES,
         default=STATUS_SECURE)
     requested_by = models.CharField(max_length=8, choices=REQUESTED_BY,

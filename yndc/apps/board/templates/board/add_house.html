@@ -49,6 +49,14 @@
                         </tr>
                         <tr>
                             <td>
+                                <div class="form-group">
+                                    <label>Photo 2</label>
+                                    {{ house_form.additional_photo }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <div class="form-group{% if house_form.status.errors %} has-error{% endif %}">
                                     <label>Status</label>
                                     <select name="status" class="form-control">
