@@ -131,7 +131,7 @@ class House(models.Model):
     general_check_mow = models.BooleanField(default=False,
         help_text='Mow, clear cut, and rake lawn.')
     general_check_flower_beds = models.BooleanField(default=False,
-        help_text='Clea out flower beds.')
+        help_text='Clear out flower beds.')
     general_check_paint = models.BooleanField(default=False,
         help_text='Paint existing boards.')
 
