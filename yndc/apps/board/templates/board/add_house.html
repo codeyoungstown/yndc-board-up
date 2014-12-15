@@ -53,7 +53,7 @@
                                     <label>Status</label>
                                     <select name="status" class="form-control">
                                     {% for k, v in house_form.status.field.choices %}
-                                    <option value="{{ k }}"{% if house_form.status.value == v %} selected="selected"{% endif %}>{{ v }}</option>
+                                    <option value="{{ k }}"{% if house_form.status.value == k %} selected="selected"{% endif %}>{{ v }}</option>
                                     {% endfor %}
                                 </div>
                             </td>
@@ -64,7 +64,7 @@
                                     <label>Requested By</label>
                                     <select name="requested_by" class="form-control">
                                     {% for k, v in house_form.requested_by.field.choices %}
-                                    <option value="{{ k }}"{% if house_form.requested_by.value == v %} selected="selected"{% endif %}>{{ v }}</option>
+                                    <option value="{{ k }}"{% if house_form.requested_by.value == k %} selected="selected"{% endif %}>{{ v }}</option>
                                     {% endfor %}
                                 </div>
                             </td>

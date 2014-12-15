@@ -29,7 +29,7 @@
                                     <label>Type</label>
                                     <select name="type" class="form-control">
                                     {% for k, v in form.type.field.choices %}
-                                    <option value="{{ k }}"{% if form.type.value == v %} selected="selected"{% endif %}>{{ v }}</option>
+                                    <option value="{{ k }}"{% if form.type.value == k %} selected="selected"{% endif %}>{{ v }}</option>
                                     {% endfor %}
                                 </div>
                             </td>
