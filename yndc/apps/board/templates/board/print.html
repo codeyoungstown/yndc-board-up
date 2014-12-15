@@ -8,7 +8,7 @@
 
             <div style="float: left; width:50%;">
                 {% if house.photo %}
-                <img src="{{ house.photo.medium.url }}">
+                <img src="{{ house.photo.large.url }}">
                 {% endif %}
                 <p><b>Address:</b> {{ house.address }}</p>
                 {% if house.neighborhood %}
