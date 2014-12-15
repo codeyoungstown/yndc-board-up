@@ -29,11 +29,11 @@ class Neighborhood(models.Model):
 
 class House(models.Model):
     STATUS_SECURE = 'secure'
-    STATUS_INSECURE = 'insecure'
+    STATUS_UNSECURED = 'unsecured'
 
     STATUS_CHOICES = (
         (STATUS_SECURE, 'Secure'),
-        (STATUS_INSECURE, 'Insecure'),
+        (STATUS_UNSECURED, 'Unsecured'),
     )
 
     REQUESTED_BY_YNDC = 'Y'
