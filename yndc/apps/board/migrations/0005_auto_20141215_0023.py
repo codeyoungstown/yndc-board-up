@@ -4,11 +4,6 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 
 
-def unsecured(apps, schema_editor):
-    House = apps.get_model("board", "House")
-    House.objects.filter(status='insecure').update(status='unsecured')
-
-
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -16,5 +11,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(unsecured),
+        migrations.AlterField(
+            model_name='house',
+            name='status',
+            field=models.CharField(default=b'secure', max_length=9, choices=[(b'secure', b'Secure'), (b'unsecured', b'Unsecured')]),
+        ),
     ]
