@@ -59,3 +59,6 @@ target/
 
 # Local settings
 local.py
+
+# Dev media
+yndc/media/**
