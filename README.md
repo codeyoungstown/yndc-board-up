@@ -10,7 +10,7 @@ An application to help track and manage property boardups and cleanups for the [
 5. Create a user
 
 ## Python environment
-It is recommended that you use [virtualenv](https://pypi.python.org/pypi/virtualenv) for your python environment. [virtualenv-burrito](https://github.com/brainsik/virtualenv-burrito) is an easy way to get a working python development environment. After installing virtualenv-burrito, use the command `mkvirtualenv` to create a new venv. 
+[virtualenv-burrito](https://github.com/brainsik/virtualenv-burrito) is an easy way to get a working python development environment. After installing virtualenv-burrito, use the command `mkvirtualenv` to create a new venv, and `workon` to access your available venvs.
 
 ## Python requirements
 Once inside your venv you need to install the python dependencies. The command `pip install -r requirements.txt` should do it.
