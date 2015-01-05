@@ -56,7 +56,7 @@ class House(models.Model):
     photo = ThumbnailerImageField(upload_to='yndc-photos')
     additional_photo = ThumbnailerImageField(upload_to='yndc-photos', blank=True)
     status = models.CharField(max_length=9, choices=STATUS_CHOICES,
-        default=STATUS_SECURE)
+        default=STATUS_UNSECURED)
     requested_by = models.CharField(max_length=8, choices=REQUESTED_BY,
         default=REQUESTED_BY_YNDC)
 
