@@ -2,6 +2,7 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('board.views',
     url(r'^/?$', 'list', name='list'),
+    url(r'^bulk-print/?$', 'bulk_print', name='bulk_print'),
     url(r'^add-property/?$', 'add_house', name='add_house'),
     url(r'^property/(?P<house_slug>[\w-]+)/?$', 'house', name='house'),
     url(r'^property/(?P<house_slug>[\w-]+)/edit/?$', 'edit_house', name='edit_house'),

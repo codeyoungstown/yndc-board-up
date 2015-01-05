@@ -109,7 +109,14 @@ def edit_house(request, house_slug):
 @login_required
 def print_house(request, house_slug):
     house = get_object_or_404(House, slug=house_slug)
-    return render(request, 'board/print.html', {'house': house})
+    return render(request, 'board/print.html', {'houses': [house]})
+
+
+@login_required
+def bulk_print(request):
+    house_pks = request.GET.getlist('houses')
+    houses = House.objects.filter(pk__in=house_pks)
+    return render(request, 'board/print.html', {'houses': houses})
 
 
 @login_required

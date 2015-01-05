@@ -1,0 +1,58 @@
+            <h1 style="text-align:center;">{{ house.address }}</h1>
+            <hr>
+
+            <div style="float: left; width:50%;">
+                {% if house.photo %}
+                <img src="{{ house.photo.print.url }}">
+                {% endif %}
+                <p><b>Address:</b> {{ house.address }}</p>
+                {% if house.neighborhood %}
+                <p><b>Neighborhood:</b> {{ house.neighborhood.name }}</p>
+                {% endif %}
+                <p><b>Status:</b> {{ house.get_status_display }}</p>
+                <p><b>Requested By:</b> {{ house.get_requested_by_display }}</p>
+                <p><b>Surveyed on:</b> {{ house.created_at }}</p>
+                <p><b>Surveyed by:</b> {{ house.created_by.get_full_name }}</p>
+                {% if house.notes %}
+                <p><b>Notes:</b> {{ house.notes }}</p>
+                {% endif %}
+            </div>
+
+            <div style="float: left; width:50%">
+                {% if house.outside_checklist %}
+                <h3>Outside Checklist:</h3>
+                <ul>
+                    {% for check in house.outside_checklist %}
+                    <li>{{ check.title }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if house.removal_checklist %}
+                <h3>Removal Checklist:</h3>
+                <ul>
+                    {% for check in house.removal_checklist %}
+                    <li>{{ check.title }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if house.general_checklist %}
+                <h3>General Checklist:</h3>
+                <ul>
+                    {% for check in house.general_checklist %}
+                    <li>{{ check.title }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                {% if house.boards.all %}
+                <h3>Boards</h3>
+                <ul>
+                {% for board in house.boards.all %}
+                <li><strong>{{ board.description }}</strong> - {{ board.width }}W x {{ board.height }}H</li>
+                {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            <div style="clear:both;"></div>

@@ -68,3 +68,7 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.print-area section {
+    page-break-after: always;
+}
