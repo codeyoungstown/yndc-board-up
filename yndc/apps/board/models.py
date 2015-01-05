@@ -220,3 +220,6 @@ class Event(models.Model):
     vacant_homes_rehabed = models.PositiveIntegerField(help_text='Vacant homes repaired.')
 
     objects = EventManager()
+
+    class Meta:
+        ordering = ['-date']

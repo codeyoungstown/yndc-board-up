@@ -7,7 +7,7 @@
           <li class="active">Event</li>
         </ol>
 
-        <h1>{{ house.address }} Event - {{ event.date }}</h1>
+        <h1>{{ house.address }} Event - {{ event.date|date:"m/d/Y" }}</h1>
 
         {% if not is_mobile %}
         <div class="action-buttons">

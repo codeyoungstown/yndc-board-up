@@ -25,7 +25,7 @@
               {% for event in house.events.active %}
               <tr>
                 <td>
-                    <a href="{% url 'event' house.slug event.pk %}">{{ event.date }}</a>
+                    <a href="{% url 'event' house.slug event.pk %}">{{ event.date|date:"m/d/Y" }}</a>
                 </td>
                 <td>{{ event.get_type_display }}</td>
                 <td>
