@@ -1,5 +1,6 @@
 {% extends "base_index.html" %}
 {% block content %}
+    <form action="{% url 'bulk_print' %}" method="GET">
         <div class="btn-group filter-button">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
             {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
@@ -13,6 +14,10 @@
             </ul>
         </div>
 
+        {% if not is_mobile %}
+        <button type="submit" class="btn btn-default print-selected-button"><span class="glyphicon glyphicon-print"></span> Print Selected</button>
+        {% endif %}
+
         <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
 
         <div style="clear:both"></div>
@@ -24,6 +29,7 @@
             <thead>
               <tr>
                 {% if not is_mobile %}
+                <th width="3%"></th>
                 <th>Thumbnail</th>
                 {% endif %}
                 <th>Address</th>
@@ -37,6 +43,7 @@
               {% for house in houses %}
               <tr>
                 {% if not is_mobile %}
+                <td class="bulk-select"><input type="checkbox" name="houses" value="{{ house.pk }}"></td>
                 <td><a href="{% url 'house' house.slug %}"><img src="{{ house.photo.small.url }}" height="50" width="50"></a></td>
                 {% endif %}
                 <td{% if is_mobile %} class="address-nowrap"{% endif %}>
@@ -72,4 +79,5 @@
         {% else %}
         <small>No properties exist.</small>
         {% endif %}
+    </form>
 {% endblock content %}

@@ -39,6 +39,11 @@
     float: right;
 }
 
+.print-selected-button {
+    float: right;
+    margin: 0 5px;
+}
+
 .filter-button {
     float: left;
 }
@@ -62,6 +67,11 @@
 
 .table-fixed {
     table-layout: fixed;
+}
+
+.table-fixed .bulk-select {
+    text-align: center;
+    vertical-align: middle;"
 }
 
 .address-nowrap {
