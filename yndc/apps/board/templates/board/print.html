@@ -16,6 +16,8 @@
                 {% endif %}
                 <p><b>Status:</b> {{ house.get_status_display }}</p>
                 <p><b>Requested By:</b> {{ house.get_requested_by_display }}</p>
+                <p><b>Surveyed on:</b> {{ house.created_at }}</p>
+                <p><b>Surveyed by:</b> {{ house.created_by.get_full_name }}</p>
                 {% if house.notes %}
                 <p><b>Notes:</b> {{ house.notes }}</p>
                 {% endif %}
