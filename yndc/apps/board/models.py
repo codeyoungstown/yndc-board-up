@@ -39,11 +39,13 @@ class House(models.Model):
     REQUESTED_BY_YNDC = 'Y'
     REQUESTED_BY_CITY = 'C'
     REQUESTED_BY_NEIGHBORHOOD = 'N'
+    REQUESTED_BY_LAND_BANK = 'L'
 
     REQUESTED_BY = (
         (REQUESTED_BY_YNDC, 'YNDC'),
         (REQUESTED_BY_CITY, 'City'),
         (REQUESTED_BY_NEIGHBORHOOD, 'Neighborhood'),
+        (REQUESTED_BY_LAND_BANK, 'Lank Bank'),
     )
 
     address = models.CharField(max_length=255)
