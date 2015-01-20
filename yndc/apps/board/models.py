@@ -209,15 +209,24 @@ class Event(models.Model):
     archived = models.BooleanField(default=False)
 
     # Counts
-    tires_picked_up = models.PositiveIntegerField(help_text='Tires picked up.')
-    bags_of_trash = models.PositiveIntegerField(help_text='Bags of trash removed.')
-    cubic_yards_of_debris = models.PositiveIntegerField(help_text='Cubic yards of debris removed.')
-    linear_feet_sidewalk_scraped = models.PositiveIntegerField(help_text='Linear feer of sidewalk scraped.')
-    boards_cut = models.PositiveIntegerField(help_text='Boards cut.')
-    vacant_structures_cleaned = models.PositiveIntegerField(help_text='Vacant structures boarded / cleaned up.')
-    vacant_lots_repurposed = models.PositiveIntegerField(help_text='Vacant lots repurposed.')
-    occupied_homes_repaired = models.PositiveIntegerField(help_text='Occupied homes repaired.')
-    vacant_homes_rehabed = models.PositiveIntegerField(help_text='Vacant homes repaired.')
+    tires_picked_up = models.PositiveIntegerField(default=0,
+        help_text='Tires picked up.')
+    bags_of_trash = models.PositiveIntegerField(default=0,
+        help_text='Bags of trash removed.')
+    cubic_yards_of_debris = models.PositiveIntegerField(default=0,
+        help_text='Cubic yards of debris removed.')
+    linear_feet_sidewalk_scraped = models.PositiveIntegerField(default=0,
+        help_text='Linear feer of sidewalk scraped.')
+    boards_cut = models.PositiveIntegerField(default=0,
+        help_text='Boards cut.')
+    vacant_structures_cleaned = models.PositiveIntegerField(default=0,
+        help_text='Vacant structures boarded / cleaned up.')
+    vacant_lots_repurposed = models.PositiveIntegerField(default=0,
+        help_text='Vacant lots repurposed.')
+    occupied_homes_repaired = models.PositiveIntegerField(default=0,
+        help_text='Occupied homes repaired.')
+    vacant_homes_rehabed = models.PositiveIntegerField(default=0,
+        help_text='Vacant homes repaired.')
 
     objects = EventManager()
 
