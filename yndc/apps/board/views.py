@@ -173,6 +173,27 @@ def add_board(request, house_slug):
 
 
 @login_required
+def edit_board(request, house_slug, board_id):
+    try:
+        board = Board.objects.select_related('house').get(pk=board_id,
+            house__slug=house_slug)
+    except:
+        raise Http404()
+
+    if request.method == 'POST':
+        board_form = BoardForm(request.POST, instance=board)
+
+        if board_form.is_valid():
+            board.save()
+            return HttpResponseRedirect(reverse('boards', args=[board.house.slug]))
+    else:
+        board_form = BoardForm(instance=board)
+
+    return render(request, 'board/add_board.html', {'house': board.house,
+        'form': board_form})
+
+
+@login_required
 def delete_board(request, house_slug, board_id):
     board = get_object_or_404(Board, house__slug=house_slug, pk=board_id)
     board.delete()
