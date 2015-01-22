@@ -2,12 +2,13 @@
             <hr>
 
             <div style="float: left; width:50%;">
-                {% if house.photo %}
-                <img src="{{ house.photo.print.url }}" style="margin-bottom:10px;">
+                {% if house.photo and house.additional_photo %}
+                <img src="{{ house.photo.medium.url }}" style="margin-bottom:10px;">
+                <img src="{{ house.additional_photo.medium.url }}">
+                {% elif house.photo %}
+                <img src="{{ house.photo.print.url }}">
                 {% endif %}
-                {% if house.additional_photo %}
-                <img src="{{ house.additional_photo.print.url }}">
-                {% endif %}
+
                 <p><b>Address:</b> {{ house.address }}</p>
                 {% if house.neighborhood %}
                 <p><b>Neighborhood:</b> {{ house.neighborhood.name }}</p>
