@@ -140,6 +140,9 @@ class House(models.Model):
 
     objects = HouseManager()
 
+    class Meta:
+        ordering = ['-created_at']
+
     def __unicode__(self):
         return self.address
 
