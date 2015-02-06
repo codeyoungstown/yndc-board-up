@@ -1,26 +1,69 @@
 {% extends "base_index.html" %}
 {% block content %}
-    <form action="{% url 'bulk_print' %}" method="GET">
-        <div class="btn-group filter-button">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/">ALL</a></li>
-                <li class="divider"></li>
-                {% for neighborhood in neighborhoods %}
-                <li><a href="?neighborhood={{ neighborhood.slug }}">{{ neighborhood.name }}</a></li>
-                {% endfor %}
-            </ul>
+    <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
+    <div style="clear:both"></div>
+
+    {% if not is_mobile %}
+    <hr>
+    <form class="form-inline" style="text-align:right;">
+        <div class="form-group" style="margin-right:10px;">
+            <label>By neighborhood</label>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/">ALL</a></li>
+                    <li class="divider"></li>
+                    {% for neighborhood in neighborhoods %}
+                    <li><a href="?neighborhood={{ neighborhood.slug }}">{{ neighborhood.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
+        <div class="form-group" style="margin-right:10px;">
+            <label>By archived</label>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                {% if archived %}Yes{% else %}No{% endif %} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/">No</a></li>
+                    <li class="divider"></li>
+                    <li><a href="?archived=yes">Yes</a></li>
+                    <li><a href="?archived=no">No</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group" style="margin-right:10px;">
+            <label>Order By</label>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                {% if order_by %}{{ order_by}}{% else %}-created_at{% endif %} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="/">-created_at</a></li>
+                    <li class="divider"></li>
+                    <li><a href="?order=address">Address</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Search</label>
+            <input type="text" class="form-control" placeholder="Search query">
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
+    </form>
+    <hr>
+    {% endif %}
 
-        {% if not is_mobile %}
-        <button type="submit" class="btn btn-default print-selected-button"><span class="glyphicon glyphicon-print"></span> Print Selected</button>
-        {% endif %}
-
-        <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
-
-        <div style="clear:both"></div>
+    <form action="{% url 'bulk_print' %}" method="GET">
+        <div style="margin-bottom:10px;">
+            {% if not is_mobile %}
+            <button type="submit" class="btn btn-default print-selected-button"><span class="glyphicon glyphicon-print"></span> Print Selected</button>
+            {% endif %}
+            <div style="clear:both"></div>
+        </div>
 
         <hr>
 
