@@ -22,5 +22,5 @@ urlpatterns = patterns('board.views',
     url(r'^neighborhoods/add-neighborhood/?$', 'add_neighborhood', name='add_neighborhood'),
     url(r'^neighborhoods/(?P<neighborhood_slug>[\w-]+)/delete/?$', 'delete_neighborhood', name='delete_neighborhood'),
     url(r'^login/?$', 'login_user'),
-    url(r'^logout/?$', 'logout_user'),
+    url(r'^logout/?$', 'logout_user', name='logout_user'),
 )

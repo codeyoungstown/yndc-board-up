@@ -18,6 +18,9 @@
                     <li{% if page == 'properties' %} class="active"{% endif %}><a href="{% url 'list' %}">Properties</a></li>
                     <li{% if page == 'neighborhoods' %} class="active"{% endif %}><a href="{% url 'neighborhoods' %}">Neighborhoods</a></li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{% url 'logout_user' %}">Logout</a></li>
+                </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
