@@ -1,18 +1,9 @@
 {% extends "base_index.html" %}
+{% load querystring %}
+
 {% block content %}
-    <form action="{% url 'bulk_print' %}" method="GET">
-        <div class="btn-group filter-button">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/">ALL</a></li>
-                <li class="divider"></li>
-                {% for neighborhood in neighborhoods %}
-                <li><a href="?neighborhood={{ neighborhood.slug }}">{{ neighborhood.name }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+
+        <form action="{% url 'bulk_print' %}" method="GET">
 
         {% if not is_mobile %}
         <button type="submit" class="btn btn-default print-selected-button"><span class="glyphicon glyphicon-print"></span> Print Selected</button>
@@ -24,8 +15,40 @@
 
         <hr>
 
+        <div class="panel panel-info">
+            <div class="panel-heading">Filters</div>
+            <div class="panel-body filters">
+
+                <label>By Neighborhood</label>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% querystring query_string neighborhood-=neighborhood_filter.slug %}">ALL</a></li>
+                        <li class="divider"></li>
+                        {% for neighborhood in neighborhoods %}
+                        <li><a href="{% querystring query_string neighborhood=neighborhood.slug %}">{{ neighborhood.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <label>By Archived</label>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    {% if archived_filter %}Yes{% else %}No{% endif %} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class="divider"></li>
+                        <li><a href="{% querystring query_string archived=1 %}">Yes</a></li>
+                        <li><a href="{% querystring query_string archived=0 %}">No</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
         {% if houses %}
-        <table class="table table-striped table-fixed table-fixed">
+        <table class="table table-striped table-fixed table-bordered">
             <thead>
               <tr>
                 {% if not is_mobile %}

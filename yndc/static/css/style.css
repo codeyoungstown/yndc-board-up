@@ -44,8 +44,12 @@
     margin: 0 5px;
 }
 
-.filter-button {
-    float: left;
+.filters label {
+    margin-left:10px;
+}
+
+.filters label:first-child {
+    margin-left:0;
 }
 
 .photo-help {
