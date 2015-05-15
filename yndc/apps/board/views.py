@@ -33,7 +33,13 @@ def logout_user(request):
 def list(request):
     ctx = {'page': 'properties'}
 
-    houses = House.objects.active()
+    houses = House.objects
+
+    if request.GET.get('archived') == '1':
+        ctx['archived_filter'] = True
+        houses = houses.filter(archived=True)
+    else:
+        houses = houses.active()
 
     if request.GET.get('neighborhood'):
         try:
@@ -46,6 +52,7 @@ def list(request):
 
     ctx['houses'] = houses
     ctx['neighborhoods'] = Neighborhood.objects.all()
+    ctx['query_string'] = dict(request.GET)
     return render(request, 'board/list.html', ctx)
 
 
