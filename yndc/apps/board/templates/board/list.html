@@ -112,6 +112,31 @@
               {% endfor %}
             </tbody>
         </table>
+
+        <nav>
+          <ul class="pagination">
+            {% if houses.has_previous %}
+            <li>
+              <a href="?page={{ houses.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            {% endif %}
+
+            {% for p in houses.paginator.page_range %}
+            <li{% if p == houses.number %} class="active"{% endif %}><a href="?page={{ p }}">{{ p }}</a></li>
+            {% endfor %}
+
+            {% if houses.has_next %}
+            <li>
+              <a href="?page={{ houses.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+
         {% else %}
         <small>No properties exist.</small>
         {% endif %}
