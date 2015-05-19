@@ -84,12 +84,23 @@
                         Edit
                         {% endif %}
                     </a>
+
+                    {% if not house.archived %}
                     <a href="{% url 'archive_house' house.slug %}" onclick="return confirm('Archive this property?')" class="btn btn-default" role="button">
                         <span class="glyphicon glyphicon-save"></span>
                         {% if not is_mobile %}
                         Archive
                         {% endif %}
                     </a>
+                    {% else %}
+                    <a href="{% url 'unarchive_house' house.slug %}" onclick="return confirm('Unarchive this property?')" class="btn btn-default" role="button">
+                        <span class="glyphicon glyphicon-save"></span>
+                        {% if not is_mobile %}
+                        Unarchive
+                        {% endif %}
+                    </a>
+                    {% endif %}
+
                     <a href="{% url 'delete_house' house.slug %}" onclick="return confirm('Delete this property?')" class="btn btn-danger" role="button">
                         <span class="glyphicon glyphicon-remove"></span>
                         {% if not is_mobile %}

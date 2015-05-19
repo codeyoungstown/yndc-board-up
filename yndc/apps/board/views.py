@@ -71,6 +71,14 @@ def archive_house(request, house_slug):
 
 
 @login_required
+def unarchive_house(request, house_slug):
+    house = get_object_or_404(House, slug=house_slug)
+    house.archived = False
+    house.save()
+    return HttpResponseRedirect(reverse('list'))
+
+
+@login_required
 def delete_house(request, house_slug):
     house = get_object_or_404(House, slug=house_slug)
     house.delete()
