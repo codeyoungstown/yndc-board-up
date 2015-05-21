@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404, render
@@ -33,13 +34,13 @@ def logout_user(request):
 def list(request):
     ctx = {'page': 'properties'}
 
-    houses = House.objects
+    houses_queryset = House.objects
 
     if request.GET.get('archived') == '1':
         ctx['archived_filter'] = True
-        houses = houses.filter(archived=True)
+        houses_queryset = houses_queryset.filter(archived=True)
     else:
-        houses = houses.active()
+        houses_queryset = houses_queryset.active()
 
     if request.GET.get('neighborhood'):
         try:
@@ -48,7 +49,17 @@ def list(request):
             pass
         else:
             ctx['neighborhood_filter'] = neighborhood_filter
-            houses = houses.filter(neighborhood_id=neighborhood_filter.pk)
+            houses_queryset = houses_queryset.filter(neighborhood_id=neighborhood_filter.pk)
+
+    paginator = Paginator(houses_queryset, 20)
+    page = request.GET.get('page')
+
+    try:
+        houses = paginator.page(page)
+    except PageNotAnInteger:
+        houses = paginator.page(1)
+    except EmptyPage:
+        houses = paginator.page(paginator.num_pages)
 
     ctx['houses'] = houses
     ctx['neighborhoods'] = Neighborhood.objects.all()
