@@ -26,10 +26,10 @@
                     {% if neighborhood_filter %}{{ neighborhood_filter.name }}{% else %}ALL{% endif %} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="{% querystring query_string neighborhood-=neighborhood_filter.slug %}">ALL</a></li>
+                        <li><a href="{% querystring query_string neighborhood-=neighborhood_filter.slug page=1 %}">ALL</a></li>
                         <li class="divider"></li>
                         {% for neighborhood in neighborhoods %}
-                        <li><a href="{% querystring query_string neighborhood=neighborhood.slug %}">{{ neighborhood.name }}</a></li>
+                        <li><a href="{% querystring query_string neighborhood=neighborhood.slug page=1 %}">{{ neighborhood.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -41,8 +41,8 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li class="divider"></li>
-                        <li><a href="{% querystring query_string archived=1 %}">Yes</a></li>
-                        <li><a href="{% querystring query_string archived=0 %}">No</a></li>
+                        <li><a href="{% querystring query_string archived=1 page=1 %}">Yes</a></li>
+                        <li><a href="{% querystring query_string archived=0 page=1 %}">No</a></li>
                     </ul>
                 </div>
             </div>
