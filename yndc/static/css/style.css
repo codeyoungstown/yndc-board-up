@@ -86,3 +86,8 @@
 .print-area section {
     page-break-after: always;
 }
+
+.yndc-search {
+    float: right;
+    margin-left: 10px;
+}

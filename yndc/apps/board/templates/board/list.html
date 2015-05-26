@@ -2,14 +2,26 @@
 {% load querystring %}
 
 {% block content %}
+        <form action="" method="GET" class="form-inline yndc-search">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control"{% if search_query %} value="{{ search_query }}"{% endif %}>
+                {% if neighborhood_filter %}<input type="hidden" name="neighborhood" value="{{ neighborhood_filter.slug }}">{% endif %}
+                {% if archived_filter %}<input type="hidden" name="archived" value="{{ archived_filter }}">{% endif %}
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+        </form>
+
+        <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
+
+        <div style="clear:both"></div>
+
+        <hr>
 
         <form action="{% url 'bulk_print' %}" method="GET">
 
         {% if not is_mobile %}
         <button type="submit" class="btn btn-default print-selected-button"><span class="glyphicon glyphicon-print"></span> Print Selected</button>
         {% endif %}
-
-        <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
 
         <div style="clear:both"></div>
 
