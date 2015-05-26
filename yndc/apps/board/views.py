@@ -36,12 +36,20 @@ def list(request):
 
     houses_queryset = House.objects
 
+    # Archived filter
     if request.GET.get('archived') == '1':
         ctx['archived_filter'] = True
         houses_queryset = houses_queryset.filter(archived=True)
     else:
         houses_queryset = houses_queryset.active()
 
+    # Search
+    search_query = request.GET.get('search')
+    if search_query:
+        ctx['search_query'] = search_query
+        houses_queryset = houses_queryset.filter(address__contains=search_query)
+
+    # Neighborhood filter
     if request.GET.get('neighborhood'):
         try:
             neighborhood_filter = Neighborhood.objects.get(slug=request.GET['neighborhood'])
