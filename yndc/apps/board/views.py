@@ -47,7 +47,7 @@ def list(request):
     search_query = request.GET.get('search')
     if search_query:
         ctx['search_query'] = search_query
-        houses_queryset = houses_queryset.filter(address__contains=search_query)
+        houses_queryset = houses_queryset.filter(address__icontains=search_query)
 
     # Neighborhood filter
     if request.GET.get('neighborhood'):
