@@ -126,7 +126,7 @@
         </table>
 
         <nav>
-          <ul class="pagination">
+          <ul class="pagination inline">
             {% if houses.has_previous %}
             <li>
               <a href="{% querystring query_string page=houses.previous_page_number %}" aria-label="Previous">
@@ -147,6 +147,20 @@
             </li>
             {% endif %}
           </ul>
+
+          <div class="dropup inline per-page">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ per_page }} per page
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+              <li><a href="{% querystring query_string per_page=50 %}">50 per page</a></li>
+              <li><a href="{% querystring query_string per_page=100 %}">100 per page</a></li>
+              <li><a href="{% querystring query_string per_page=200 %}">200 per page</a></li>
+              <li><a href="{% querystring query_string per_page=500 %}">500 per page</a></li>
+            </ul>
+          </div>
+
         </nav>
 
         {% else %}
