@@ -1,9 +1,9 @@
 .container-fluid {
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 
-.pad{
-    margin:10px 0 10px 0;
+.pad {
+    margin: 10px 0 10px 0;
 }
 
 .login-container {
@@ -45,11 +45,11 @@
 }
 
 .filters label {
-    margin-left:10px;
+    margin-left: 10px;
 }
 
 .filters label:first-child {
-    margin-left:0;
+    margin-left: 0;
 }
 
 .photo-help {
@@ -75,7 +75,7 @@
 
 .table-fixed .bulk-select {
     text-align: center;
-    vertical-align: middle;"
+    vertical-align: middle;
 }
 
 .address-nowrap {
