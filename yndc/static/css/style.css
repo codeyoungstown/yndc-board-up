@@ -91,3 +91,11 @@
     float: right;
     margin-left: 10px;
 }
+
+.per-page {
+    margin-left: 10px;
+}
+
+.inline {
+    display: inline;
+}

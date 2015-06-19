@@ -59,7 +59,10 @@ def list(request):
             ctx['neighborhood_filter'] = neighborhood_filter
             houses_queryset = houses_queryset.filter(neighborhood_id=neighborhood_filter.pk)
 
-    paginator = Paginator(houses_queryset, 50)
+    per_page = request.GET.get('per_page', 50)
+    ctx['per_page'] = per_page
+
+    paginator = Paginator(houses_queryset, per_page)
     page = request.GET.get('page')
 
     try:
