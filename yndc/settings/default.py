@@ -106,6 +106,8 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
 LOGIN_URL = '/login/'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
