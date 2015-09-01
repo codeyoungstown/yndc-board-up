@@ -3,11 +3,13 @@
 
 {% block content %}
         <form action="" method="GET" class="form-inline yndc-search">
-            <div class="form-group">
+            {% if neighborhood_filter %}<input type="hidden" name="neighborhood" value="{{ neighborhood_filter.slug }}">{% endif %}
+            {% if archived_filter %}<input type="hidden" name="archived" value="{{ archived_filter }}">{% endif %}
+            <div class="input-group">
                 <input type="text" name="search" class="form-control"{% if search_query %} value="{{ search_query }}"{% endif %}>
-                {% if neighborhood_filter %}<input type="hidden" name="neighborhood" value="{{ neighborhood_filter.slug }}">{% endif %}
-                {% if archived_filter %}<input type="hidden" name="archived" value="{{ archived_filter }}">{% endif %}
-                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
             </div>
         </form>
 
