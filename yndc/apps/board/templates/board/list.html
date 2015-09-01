@@ -2,6 +2,8 @@
 {% load querystring %}
 
 {% block content %}
+
+        {% if not is_mobile %}
         <form action="" method="GET" class="form-inline yndc-search">
             {% if neighborhood_filter %}<input type="hidden" name="neighborhood" value="{{ neighborhood_filter.slug }}">{% endif %}
             {% if archived_filter %}<input type="hidden" name="archived" value="{{ archived_filter }}">{% endif %}
@@ -12,9 +14,9 @@
                 </span>
             </div>
         </form>
+        {% endif %}
 
         <a href="{% url 'add_house' %}" class="btn btn-default add-button" role="button"><span class="glyphicon glyphicon-plus"></span> New</a>
-
         <div style="clear:both"></div>
 
         <hr>
@@ -27,9 +29,8 @@
 
         <div style="clear:both"></div>
 
-        <hr>
-
         {% if not is_mobile %}
+        <hr>
         <div class="panel panel-info">
             <div class="panel-heading">Filters</div>
             <div class="panel-body filters">
