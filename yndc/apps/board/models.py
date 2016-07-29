@@ -62,6 +62,7 @@ class House(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
     archived = models.BooleanField(default=False)
 
