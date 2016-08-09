@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -155,6 +156,9 @@ class House(models.Model):
                 count += 1
             self.slug = slug_to_save
         super(House, self).save()
+
+    def updated(self):
+        House.objects.filter(pk=self.pk).update(updated_at=timezone.now())
 
     def _get_checklist(self, prefix):
         checks = []

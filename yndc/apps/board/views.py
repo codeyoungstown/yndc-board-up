@@ -201,6 +201,7 @@ def add_board(request, house_slug):
             board = form.save(commit=False)
             board.house = house
             board.save()
+            house.updated()
             return HttpResponseRedirect(reverse('boards', args=[house_slug]))
     else:
         form = BoardForm()
@@ -222,6 +223,7 @@ def edit_board(request, house_slug, board_id):
 
         if board_form.is_valid():
             board.save()
+            board.house.updated()
             return HttpResponseRedirect(reverse('boards', args=[board.house.slug]))
     else:
         board_form = BoardForm(instance=board)
@@ -234,6 +236,7 @@ def edit_board(request, house_slug, board_id):
 def delete_board(request, house_slug, board_id):
     board = get_object_or_404(Board, house__slug=house_slug, pk=board_id)
     board.delete()
+    board.house.updated()
     return HttpResponseRedirect(reverse('boards', args=[house_slug]))
 
 
@@ -261,6 +264,7 @@ def add_event(request, house_slug):
             event.house = house
             event.created_by = request.user
             event.save()
+            house.updated()
             return HttpResponseRedirect(reverse('events', args=[house_slug]))
     else:
         form = EventForm()
@@ -274,6 +278,7 @@ def archive_event(request, house_slug, event_id):
     event = get_object_or_404(Event, house__slug=house_slug, pk=event_id)
     event.archived = True
     event.save()
+    event.house.updated()
     return HttpResponseRedirect(reverse('events', args=[house_slug]))
 
 
@@ -286,6 +291,7 @@ def edit_event(request, house_slug, event_id):
 
         if form.is_valid():
             form.save()
+            event.house.updated()
             return HttpResponseRedirect(reverse('events', args=[house_slug]))
     else:
         form = EventForm(instance=event)
