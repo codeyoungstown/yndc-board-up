@@ -141,6 +141,9 @@ class House(models.Model):
         help_text='Paint existing boards.')
 
     objects = HouseManager()
+    
+    class Meta:
+        ordering = ['-updated_at']
 
     def __unicode__(self):
         return self.address
