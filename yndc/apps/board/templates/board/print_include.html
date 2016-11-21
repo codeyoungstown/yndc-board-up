@@ -17,6 +17,7 @@
                 <p><b>Requested By:</b> {{ house.get_requested_by_display }}</p>
                 <p><b>Surveyed on:</b> {{ house.created_at }}</p>
                 <p><b>Surveyed by:</b> {{ house.created_by.get_full_name }}</p>
+                <p><b>Updated on:</b> {% if house.updated_at %}{{ house.updated_at }}{% else %}Unavailable{% endif %}</p>
                 {% if house.notes %}
                 <p><b>Notes:</b> {{ house.notes }}</p>
                 {% endif %}
