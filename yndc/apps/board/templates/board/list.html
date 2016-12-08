@@ -67,12 +67,18 @@
               <tr>
                 {% if not is_mobile %}
                 <th width="3%"></th>
-                <th>Thumbnail</th>
+                <th width="8%">Thumbnail</th>
                 {% endif %}
                 <th>Address</th>
+
                 {% if not is_mobile %}
                 <th>Neighborhood</th>
                 {% endif %}
+
+                {% if not is_mobile %}
+                <th>Updated at</th>
+                {% endif %}
+
                 <th>Actions</th>
               </tr>
             </thead>
@@ -88,6 +94,9 @@
                 </td>
                 {% if not is_mobile %}
                 <td>{{ house.neighborhood.name }}</td>
+                {% endif %}
+                {% if not is_mobile %}
+                <td>{{ house.updated_at }}</td>
                 {% endif %}
                 <td>
                     <a href="{% url 'edit_house' house.slug %}" class="btn btn-default" role="button">
