@@ -62,3 +62,6 @@ local.py
 
 # Dev media
 yndc/media/**
+
+venv
+.python-version
